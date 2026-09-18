@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="BROKE CEO — CEO of absolutely nothing. $CEO on Solana." />
+  <title>BROKE CEO — $CEO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050b0d;--panel:#091316;--panel2:#0d1b1e;--text:#f5f7f7;--muted:#91a3a5;--teal:#18f0ce;--red:#ff3d4d;--gold:#f7c843;--line:rgba(24,240,206,.18);--max:1180px}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}.wrap{max-width:var(--max);margin:auto;padding:0 24px}
+    nav{position:fixed;z-index:20;top:0;left:0;right:0;background:rgba(5,11,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .navin{height:76px;display:flex;align-items:center;justify-content:space-between;max-width:var(--max);margin:auto;padding:0 24px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-1px}.crown{font-size:30px}.brand span{font-size:22px}.brand em{font-style:normal;color:var(--teal)}
+    .links{display:flex;gap:28px;font-size:13px;font-weight:800;text-transform:uppercase}.links a{color:#c6d0d1}.links a:hover{color:var(--teal)}
+    .navbtn{padding:12px 19px;border:1px solid var(--teal);border-radius:999px;color:var(--teal);font-weight:900;box-shadow:0 0 22px rgba(24,240,206,.14)}
+    .hero{min-height:900px;padding-top:76px;display:flex;align-items:center;position:relative;background:radial-gradient(circle at 75% 42%,rgba(24,240,206,.12),transparent 35%),linear-gradient(180deg,#071114,#050b0d)}
+    .hero-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:20px;align-items:center;max-width:var(--max);margin:auto;padding:70px 24px 40px}
+    .eyebrow{color:var(--teal);font-weight:900;letter-spacing:4px;font-size:12px;text-transform:uppercase;margin-bottom:18px}.title{font-family:Anton,Impact,sans-serif;font-size:clamp(76px,10vw,138px);line-height:.82;letter-spacing:-3px;margin:0}.title .ceo{color:var(--teal);display:block}.stroke{height:12px;background:var(--teal);transform:skewX(-18deg);margin:28px 0 22px;width:min(460px,90%)}
+    .tag{font-size:clamp(20px,2.2vw,29px);font-weight:800;line-height:1.15;max-width:560px}.tag span{color:var(--muted)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 23px;border-radius:12px;font-weight:900;letter-spacing:.2px}.primary{background:var(--teal);color:#041012;box-shadow:0 0 30px rgba(24,240,206,.2)}.secondary{border:1px solid rgba(245,247,247,.25);background:#0a1316}.meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:30px;color:#b9c5c6;font-size:13px;font-weight:800;text-transform:uppercase}.meta b{color:var(--text)}
+    .hero-art{position:relative}.hero-art img{display:block;width:100%;border-radius:22px;border:1px solid rgba(24,240,206,.25);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 70px rgba(24,240,206,.08)}
+    .ticker{position:absolute;right:22px;bottom:20px;background:rgba(5,11,13,.88);border:1px solid var(--teal);padding:10px 14px;border-radius:10px;font-weight:900;color:var(--teal)}
+    section{padding:110px 0}.section-head{max-width:760px;margin-bottom:44px}.kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:4px;text-transform:uppercase}.h2{font-family:Anton,Impact,sans-serif;font-size:clamp(52px,7vw,88px);line-height:.92;margin:12px 0 16px}.lead{color:var(--muted);font-size:18px;line-height:1.7}
+    .story{background:#071013}.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.card{background:linear-gradient(145deg,#0b171a,#071012);border:1px solid var(--line);border-radius:20px;padding:30px}.quote{font-family:Anton,Impact,sans-serif;font-size:42px;line-height:1.05}.quote span{color:var(--teal)}
+    .token-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:26px;border:1px solid var(--line);background:var(--panel);border-radius:16px}.stat strong{display:block;font-size:30px}.stat small{color:var(--muted);text-transform:uppercase;font-weight:800;letter-spacing:1px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.step{border:1px solid var(--line);border-radius:18px;padding:28px;background:var(--panel)}.num{color:var(--teal);font-weight:900;font-size:13px}.step h3{font-size:22px;margin:12px 0 8px}.step p{color:var(--muted);line-height:1.6;margin:0}
+    .board{background:linear-gradient(180deg,#050b0d,#071518)}.boardbox{border:1px solid var(--line);border-radius:24px;padding:44px;text-align:center;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.11),transparent 50%),#071013}.boardbox img{width:120px;height:120px;border-radius:50%;border:3px solid var(--teal);object-fit:cover;margin-bottom:20px}.boardbox p{max-width:640px;margin:0 auto 25px;color:var(--muted);line-height:1.7}
+    footer{padding:35px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.disclaimer{max-width:760px;margin-top:14px;line-height:1.6}
+    @media(max-width:900px){.links{display:none}.hero{min-height:auto}.hero-grid,.story-grid{grid-template-columns:1fr}.hero-grid{padding-top:55px}.hero-art{order:-1}.token-grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.title{font-size:88px}}
+    @media(max-width:520px){.navin{height:66px}.navbtn{padding:10px 14px}.hero-grid{padding-left:16px;padding-right:16px}.wrap{padding:0 16px}.title{font-size:68px}.token-grid{grid-template-columns:1fr}.card,.boardbox{padding:24px}.quote{font-size:34px}}
+  </style>
+</head>
+<body>
+  <nav><div class="navin"><a class="brand" href="#top"><span class="crown">♛</span><span>BROKE <em>CEO</em></span></a><div class="links"><a href="#story">The Story</a><a href="#token">Token</a><a href="#buy">How To Buy</a><a href="#board">The Board</a></div><a class="navbtn" href="#buy">BUY $CEO</a></div></nav>
+
+  <main id="top">
+    <section class="hero"><div class="hero-grid">
+      <div>
+        <div class="eyebrow">The official headquarters of absolutely nothing</div>
+        <h1 class="title">BROKE <span class="ceo">CEO</span></h1>
+        <div class="stroke"></div>
+        <p class="tag">Everyone is a CEO until the chart dumps. <span>📉</span></p>
+        <div class="hero-actions"><a class="btn primary" href="#buy">BUY $CEO →</a><a class="btn secondary" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">JOIN THE BOARD ↗</a></div>
+        <div class="meta"><span><b>1B</b> $CEO</span><span>•</span><span>SOLANA</span><span>•</span><span>PUMP.FUN</span></div>
+      </div>
+      <div class="hero-art"><img src="assets/broke-ceo-hero.png" alt="BROKE CEO meme artwork"><div class="ticker">$CEO 👑</div></div>
+    </div></section>
+
+    <section id="story" class="story"><div class="wrap"><div class="section-head"><div class="kicker">The Story</div><h2 class="h2">Billion-dollar dreams.<br>Zero-dollar portfolio.</h2><p class="lead">BROKE CEO is a meme project built around one simple truth: the confidence of a CEO doesn't require a bank balance.</p></div><div class="story-grid"><div class="card"><div class="quote">“I may be broke.<br><span>But I'm still CEO.</span>”</div></div><div class="card"><p class="lead">No complicated lore. No corporate boardroom. Just the internet's most overconfident executive, watching the candles and pretending every red move is “just a dip.”</p><p class="lead">$CEO is a meme coin. Nothing on this site is a promise of profit or financial advice.</p></div></div></div></section>
+
+    <section id="token"><div class="wrap"><div class="section-head"><div class="kicker">The Token</div><h2 class="h2">CEO MODE: ON.</h2><p class="lead">A simple launch setup for a simple meme.</p></div><div class="token-grid"><div class="stat"><strong>1B</strong><small>Total supply</small></div><div class="stat"><strong>$CEO</strong><small>Ticker</small></div><div class="stat"><strong>Solana</strong><small>Network</small></div><div class="stat"><strong>Pump.fun</strong><small>Launch</small></div></div></div></section>
+
+    <section id="buy" class="story"><div class="wrap"><div class="section-head"><div class="kicker">How To Buy</div><h2 class="h2">Three clicks.<br>One questionable decision.</h2></div><div class="steps"><div class="step"><div class="num">01 — GET SOL</div><h3>Fund your wallet</h3><p>Use a Solana-compatible wallet and make sure you have enough SOL for the purchase and network fees.</p></div><div class="step"><div class="num">02 — OPEN PUMP.FUN</div><h3>Find $CEO</h3><p>Once $CEO is live, use the official link or contract address published on this site.</p></div><div class="step"><div class="num">03 — JOIN THE BOARD</div><h3>Buy & meme</h3><p>Choose your amount, review the transaction, and welcome to the board.</p></div></div><div style="margin-top:30px"><a class="btn primary" href="https://pump.fun/" target="_blank" rel="noopener">OPEN PUMP.FUN →</a></div></div></section>
+
+    <section id="board" class="board"><div class="wrap"><div class="boardbox"><img src="assets/broke-ceo-avatar.png" alt="BROKE CEO avatar"><div class="kicker">The Board</div><h2 class="h2">NO MONEY. STILL CEO.</h2><p>Follow the official account for memes, launch updates and community chaos.</p><a class="btn primary" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">FOLLOW @BrokeCEOcoin →</a></div></div></section>
+  </main>
+
+  <footer><div class="wrap"><div class="foot"><strong>BROKE CEO © 2026</strong><span>$CEO • SOLANA • MEME COIN</span></div><div class="disclaimer">BROKE CEO is a meme project for entertainment. $CEO is not an investment recommendation. Crypto assets are volatile and can lose value. Only use funds you can afford to lose.</div></div></footer>
+</body>
+</html>
