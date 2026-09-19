@@ -3,14 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="BROKE CEO — CEO of absolutely nothing. $CBROKE on Solana." />
+
+  <meta
+    name="description"
+    content="BROKE CEO — CEO of absolutely nothing. $CBROKE on Solana."
+  />
+
   <title>BROKE CEO — $CBROKE</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     :root{
       --bg:#050b0d;
       --panel:#091316;
@@ -24,9 +34,13 @@
       --max:1180px
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box
+    }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth
+    }
 
     body{
       margin:0;
@@ -46,6 +60,8 @@
       margin:auto;
       padding:0 24px
     }
+
+    /* NAVIGATION */
 
     nav{
       position:fixed;
@@ -114,15 +130,26 @@
       box-shadow:0 0 22px rgba(24,240,206,.14)
     }
 
+    /* HERO */
+
     .hero{
       min-height:900px;
       padding-top:76px;
       display:flex;
       align-items:center;
       position:relative;
+
       background:
-        radial-gradient(circle at 75% 42%,rgba(24,240,206,.12),transparent 35%),
-        linear-gradient(180deg,#071114,#050b0d)
+        radial-gradient(
+          circle at 75% 42%,
+          rgba(24,240,206,.12),
+          transparent 35%
+        ),
+        linear-gradient(
+          180deg,
+          #071114,
+          #050b0d
+        )
     }
 
     .hero-grid{
@@ -229,6 +256,7 @@
       width:100%;
       border-radius:22px;
       border:1px solid rgba(24,240,206,.25);
+
       box-shadow:
         0 30px 80px rgba(0,0,0,.5),
         0 0 70px rgba(24,240,206,.08)
@@ -238,13 +266,18 @@
       position:absolute;
       right:22px;
       bottom:20px;
+
       background:rgba(5,11,13,.88);
       border:1px solid var(--teal);
+
       padding:10px 14px;
       border-radius:10px;
+
       font-weight:900;
       color:var(--teal)
     }
+
+    /* GENERAL SECTIONS */
 
     section{
       padding:110px 0
@@ -276,6 +309,8 @@
       line-height:1.7
     }
 
+    /* STORY */
+
     .story{
       background:#071013
     }
@@ -287,7 +322,13 @@
     }
 
     .card{
-      background:linear-gradient(145deg,#0b171a,#071012);
+      background:
+        linear-gradient(
+          145deg,
+          #0b171a,
+          #071012
+        );
+
       border:1px solid var(--line);
       border-radius:20px;
       padding:30px
@@ -302,6 +343,8 @@
     .quote span{
       color:var(--teal)
     }
+
+    /* TOKEN */
 
     .token-grid{
       display:grid;
@@ -327,6 +370,8 @@
       font-weight:800;
       letter-spacing:1px
     }
+
+    /* HOW TO JOIN */
 
     .steps{
       display:grid;
@@ -358,8 +403,38 @@
       margin:0
     }
 
+    /* COMING SOON */
+
+    .coming-soon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:15px 23px;
+
+      border-radius:12px;
+
+      background:var(--teal);
+      color:#041012;
+
+      font-weight:900;
+      letter-spacing:.2px;
+
+      box-shadow:
+        0 0 30px rgba(24,240,206,.2);
+
+      cursor:default
+    }
+
+    /* BOARD */
+
     .board{
-      background:linear-gradient(180deg,#050b0d,#071518)
+      background:
+        linear-gradient(
+          180deg,
+          #050b0d,
+          #071518
+        )
     }
 
     .boardbox{
@@ -367,30 +442,43 @@
       border-radius:24px;
       padding:44px;
       text-align:center;
+
       background:
-        radial-gradient(circle at 50% 0,rgba(24,240,206,.11),transparent 50%),
+        radial-gradient(
+          circle at 50% 0,
+          rgba(24,240,206,.11),
+          transparent 50%
+        ),
         #071013
     }
 
     .boardbox img{
       width:120px;
       height:120px;
+
       border-radius:50%;
       border:3px solid var(--teal);
+
       object-fit:cover;
+
       margin-bottom:20px
     }
 
     .boardbox p{
       max-width:640px;
       margin:0 auto 25px;
+
       color:var(--muted);
       line-height:1.7
     }
 
+    /* FOOTER */
+
     footer{
       padding:35px 0 50px;
+
       border-top:1px solid var(--line);
+
       color:var(--muted);
       font-size:13px
     }
@@ -398,6 +486,7 @@
     .foot{
       display:flex;
       justify-content:space-between;
+
       gap:20px;
       flex-wrap:wrap
     }
@@ -407,6 +496,8 @@
       margin-top:14px;
       line-height:1.6
     }
+
+    /* TABLET */
 
     @media(max-width:900px){
 
@@ -442,7 +533,10 @@
       .title{
         font-size:88px
       }
+
     }
+
+    /* MOBILE */
 
     @media(max-width:520px){
 
@@ -479,34 +573,66 @@
       .quote{
         font-size:34px
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
+  <!-- NAVIGATION -->
+
   <nav>
+
     <div class="navin">
 
       <a class="brand" href="#top">
-        <span class="crown">♛</span>
-        <span>BROKE <em>CEO</em></span>
+
+        <span class="crown">
+          ♛
+        </span>
+
+        <span>
+          BROKE <em>CEO</em>
+        </span>
+
       </a>
 
+
       <div class="links">
-        <a href="#story">The Story</a>
-        <a href="#token">Token</a>
-        <a href="#buy">How To Buy</a>
-        <a href="#board">The Board</a>
+
+        <a href="#story">
+          The Story
+        </a>
+
+        <a href="#token">
+          Token
+        </a>
+
+        <a href="#buy">
+          How To Join
+        </a>
+
+        <a href="#board">
+          The Board
+        </a>
+
       </div>
 
-      <a class="navbtn" href="#buy">BUY $CBROKE</a>
+
+      <a class="navbtn" href="#buy">
+        $CBROKE
+      </a>
 
     </div>
+
   </nav>
 
 
   <main id="top">
+
 
     <!-- HERO -->
 
@@ -514,29 +640,49 @@
 
       <div class="hero-grid">
 
+
         <div>
 
           <div class="eyebrow">
             The official headquarters of absolutely nothing
           </div>
 
+
           <h1 class="title">
+
             BROKE
-            <span class="ceo">CEO</span>
+
+            <span class="ceo">
+              CEO
+            </span>
+
           </h1>
+
 
           <div class="stroke"></div>
 
+
           <p class="tag">
+
             Everyone is a CEO until the chart dumps.
-            <span>📉</span>
+
+            <span>
+              📉
+            </span>
+
           </p>
+
 
           <div class="hero-actions">
 
-            <a class="btn primary" href="#buy">
-              BUY $CBROKE →
+
+            <a
+              class="btn primary"
+              href="#buy"
+            >
+              $CBROKE — COMING SOON
             </a>
+
 
             <a
               class="btn secondary"
@@ -547,31 +693,54 @@
               JOIN THE BOARD ↗
             </a>
 
+
           </div>
 
+
           <div class="meta">
-            <span><b>1B</b> $CBROKE</span>
-            <span>•</span>
-            <span>SOLANA</span>
-            <span>•</span>
-            <span>PUMP.FUN</span>
+
+            <span>
+              <b>1B</b> $CBROKE
+            </span>
+
+            <span>
+              •
+            </span>
+
+            <span>
+              SOLANA
+            </span>
+
+            <span>
+              •
+            </span>
+
+            <span>
+              MEME COIN
+            </span>
+
           </div>
+
 
         </div>
 
 
         <div class="hero-art">
 
+
           <img
             src="assets/broke-ceo-hero.png"
             alt="BROKE CEO meme artwork"
           >
 
+
           <div class="ticker">
             $CBROKE 👑
           </div>
 
+
         </div>
+
 
       </div>
 
@@ -580,9 +749,13 @@
 
     <!-- STORY -->
 
-    <section id="story" class="story">
+    <section
+      id="story"
+      class="story"
+    >
 
       <div class="wrap">
+
 
         <div class="section-head">
 
@@ -590,15 +763,21 @@
             The Story
           </div>
 
+
           <h2 class="h2">
+
             Billion-dollar dreams.
             <br>
             Zero-dollar portfolio.
+
           </h2>
 
+
           <p class="lead">
+
             BROKE CEO is a meme project built around one simple truth:
             the confidence of a CEO doesn't require a bank balance.
+
           </p>
 
         </div>
@@ -606,12 +785,20 @@
 
         <div class="story-grid">
 
+
           <div class="card">
 
             <div class="quote">
+
               “I may be broke.
               <br>
-              <span>But I'm still CEO.</span>”
+
+              <span>
+                But I'm still CEO.
+              </span>
+
+              ”
+
             </div>
 
           </div>
@@ -620,18 +807,27 @@
           <div class="card">
 
             <p class="lead">
-              No complicated lore. No corporate boardroom.
+
+              No complicated lore.
+              No corporate boardroom.
+
               Just the internet's most overconfident executive,
               watching the candles and pretending every red move is
               “just a dip.”
+
             </p>
 
+
             <p class="lead">
-              $CBROKE is a meme coin. Nothing on this site is a
-              promise of profit or financial advice.
+
+              $CBROKE is a meme coin.
+              Nothing on this site is a promise of profit
+              or financial advice.
+
             </p>
 
           </div>
+
 
         </div>
 
@@ -646,18 +842,23 @@
 
       <div class="wrap">
 
+
         <div class="section-head">
 
           <div class="kicker">
             The Token
           </div>
 
+
           <h2 class="h2">
             CEO MODE: ON.
           </h2>
 
+
           <p class="lead">
+
             A simple launch setup for a simple meme.
+
           </p>
 
         </div>
@@ -665,25 +866,58 @@
 
         <div class="token-grid">
 
-          <div class="stat">
-            <strong>1B</strong>
-            <small>Total supply</small>
-          </div>
 
           <div class="stat">
-            <strong>$CBROKE</strong>
-            <small>Ticker</small>
+
+            <strong>
+              1B
+            </strong>
+
+            <small>
+              Total supply
+            </small>
+
           </div>
 
-          <div class="stat">
-            <strong>Solana</strong>
-            <small>Network</small>
-          </div>
 
           <div class="stat">
-            <strong>Pump.fun</strong>
-            <small>Launch</small>
+
+            <strong>
+              $CBROKE
+            </strong>
+
+            <small>
+              Ticker
+            </small>
+
           </div>
+
+
+          <div class="stat">
+
+            <strong>
+              Solana
+            </strong>
+
+            <small>
+              Network
+            </small>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>
+              COMING SOON
+            </strong>
+
+            <small>
+              Launch
+            </small>
+
+          </div>
+
 
         </div>
 
@@ -692,22 +926,29 @@
     </section>
 
 
-    <!-- HOW TO BUY -->
+    <!-- HOW TO JOIN -->
 
-    <section id="buy" class="story">
+    <section
+      id="buy"
+      class="story"
+    >
 
       <div class="wrap">
+
 
         <div class="section-head">
 
           <div class="kicker">
-            How To Buy
+            How To Join
           </div>
 
+
           <h2 class="h2">
-            Three clicks.
+
+            Three steps.
             <br>
             One questionable decision.
+
           </h2>
 
         </div>
@@ -715,19 +956,24 @@
 
         <div class="steps">
 
+
           <div class="step">
 
             <div class="num">
-              01 — GET SOL
+              01 — GET READY
             </div>
 
+
             <h3>
-              Fund your wallet
+              Set up your wallet
             </h3>
 
+
             <p>
-              Use a Solana-compatible wallet and make sure you have
-              enough SOL for the purchase and network fees.
+
+              Get a Solana-compatible wallet
+              and make sure you're ready for launch.
+
             </p>
 
           </div>
@@ -736,16 +982,21 @@
           <div class="step">
 
             <div class="num">
-              02 — OPEN PUMP.FUN
+              02 — TOKEN LAUNCH
             </div>
+
 
             <h3>
               Find $CBROKE
             </h3>
 
+
             <p>
-              Once $CBROKE is live, use the official link or contract
-              address published on this site.
+
+              $CBROKE is coming soon.
+              Official launch information will be published
+              on this website and through the official account.
+
             </p>
 
           </div>
@@ -757,63 +1008,76 @@
               03 — JOIN THE BOARD
             </div>
 
+
             <h3>
               Buy & meme
             </h3>
 
+
             <p>
-              Choose your amount, review the transaction, and welcome
-              to the board.
+
+              When the token launches,
+              choose your amount, review the transaction,
+              and welcome to the board.
+
             </p>
 
           </div>
+
 
         </div>
 
 
         <div style="margin-top:30px">
 
-          <a
-            class="btn primary"
-            href="https://pump.fun/"
-            target="_blank"
-            rel="noopener"
-          >
-            OPEN PUMP.FUN →
-          </a>
+          <div class="coming-soon">
+            COMING SOON
+          </div>
 
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- BOARD -->
+    <!-- THE BOARD -->
 
-    <section id="board" class="board">
+    <section
+      id="board"
+      class="board"
+    >
 
       <div class="wrap">
 
+
         <div class="boardbox">
+
 
           <img
             src="assets/broke-ceo-avatar.png"
             alt="BROKE CEO avatar"
           >
 
+
           <div class="kicker">
             The Board
           </div>
+
 
           <h2 class="h2">
             NO MONEY. STILL CEO.
           </h2>
 
+
           <p>
-            Follow the official account for memes, launch updates
-            and community chaos.
+
+            Follow the official account for memes,
+            launch updates and community chaos.
+
           </p>
+
 
           <a
             class="btn primary"
@@ -824,11 +1088,13 @@
             FOLLOW @BrokeCEOcoin →
           </a>
 
+
         </div>
 
       </div>
 
     </section>
+
 
   </main>
 
@@ -839,17 +1105,22 @@
 
     <div class="wrap">
 
+
       <div class="foot">
+
 
         <strong>
           BROKE CEO © 2026
         </strong>
 
+
         <span>
           $CBROKE • SOLANA • MEME COIN
         </span>
 
+
       </div>
+
 
       <div class="disclaimer">
 
@@ -860,9 +1131,11 @@
 
       </div>
 
+
     </div>
 
   </footer>
+
 
 </body>
 </html>
