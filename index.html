@@ -123,6 +123,61 @@
       color:var(--teal)
     }
 
+    .mobile-menu{
+      display:none;
+      position:relative
+    }
+
+    .mobile-menu summary{
+      list-style:none;
+      cursor:pointer;
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line);
+      border-radius:10px;
+      color:var(--teal);
+      font-size:22px;
+      font-weight:900
+    }
+
+    .mobile-menu summary::-webkit-details-marker{
+      display:none
+    }
+
+    .mobile-menu[open] summary{
+      border-color:var(--teal)
+    }
+
+    .mobile-panel{
+      position:absolute;
+      top:52px;
+      right:0;
+      width:220px;
+      padding:10px;
+      background:rgba(5,11,13,.97);
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:0 16px 40px rgba(0,0,0,.35)
+    }
+
+    .mobile-panel a{
+      display:block;
+      padding:13px 14px;
+      color:#c6d0d1;
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      border-radius:9px
+    }
+
+    .mobile-panel a:hover{
+      color:var(--teal);
+      background:rgba(24,240,206,.06)
+    }
+
     .navbtn{
       padding:12px 19px;
       border:1px solid var(--teal);
@@ -507,6 +562,14 @@
         display:none
       }
 
+      .mobile-menu{
+        display:block
+      }
+
+      .navbtn{
+        display:none
+      }
+
       .hero{
         min-height:auto
       }
@@ -632,6 +695,18 @@
       <a class="navbtn" href="/#buy">
         $CBROKE
       </a>
+
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation">☰</summary>
+        <div class="mobile-panel">
+          <a href="/#story">The Story</a>
+          <a href="/#token">Token</a>
+          <a href="/#buy">How To Join</a>
+          <a href="store/">Store</a>
+          <a href="https://broke-ceo.gitbook.io/broke-ceo-docs/" target="_blank" rel="noopener">Whitepaper</a>
+          <a href="/#board">The Board</a>
+        </div>
+      </details>
 
     </div>
 
