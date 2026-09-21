@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BROKE CEO — Roadmap & Ecosystem.">
+<title>BROKE CEO — Roadmap & Ecosystem</title>
+<link rel="icon" type="image/png" href="../assets/broke-ceo-avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b0d;--panel:#091316;--panel2:#0d1b1e;--text:#f5f7f7;--muted:#91a3a5;--teal:#18f0ce;--red:#ff3d4d;--gold:#f7c843;--line:rgba(24,240,206,.18);--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}.wrap{max-width:var(--max);margin:auto;padding:0 24px}
+nav{position:fixed;z-index:20;top:0;left:0;right:0;background:rgba(5,11,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.navin{height:76px;display:flex;align-items:center;justify-content:space-between;max-width:var(--max);margin:auto;padding:0 24px}.brand{font-weight:900;letter-spacing:-1px;font-size:22px}.brand em{font-style:normal;color:var(--teal)}.links{display:flex;gap:28px;font-size:13px;font-weight:800;text-transform:uppercase}.links a{color:#c6d0d1}.links a:hover{color:var(--teal)}.mobile-menu{display:none;position:relative}.mobile-menu summary{list-style:none;cursor:pointer;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;color:var(--teal);font-size:22px;font-weight:900}.mobile-menu summary::-webkit-details-marker{display:none}.mobile-panel{position:absolute;top:52px;right:0;width:230px;padding:10px;background:rgba(5,11,13,.97);border:1px solid var(--line);border-radius:14px}.mobile-panel a{display:block;padding:13px 14px;color:#c6d0d1;font-size:13px;font-weight:800;text-transform:uppercase}.mobile-panel a:hover{color:var(--teal);background:rgba(24,240,206,.06)}
+.hero{padding:150px 0 90px;position:relative;background:radial-gradient(circle at 70% 30%,rgba(24,240,206,.12),transparent 35%),linear-gradient(180deg,#071114,#050b0d)}.eyebrow,.kicker{color:var(--teal);font-weight:900;letter-spacing:4px;font-size:12px;text-transform:uppercase}.title{font-family:Anton,Impact,sans-serif;font-size:clamp(70px,11vw,150px);line-height:.82;letter-spacing:-3px;margin:18px 0}.title span{display:block;color:var(--teal)}.lead{color:var(--muted);font-size:18px;line-height:1.7;max-width:760px}.stroke{height:10px;background:var(--teal);transform:skewX(-18deg);width:min(430px,85%);margin:28px 0}
+.section{padding:105px 0}.section.alt{background:#071013}.section-head{max-width:780px;margin-bottom:45px}.h2{font-family:Anton,Impact,sans-serif;font-size:clamp(52px,7vw,90px);line-height:.92;margin:12px 0 18px}
+.journey{display:grid;grid-template-columns:repeat(9,1fr);gap:0;align-items:stretch}.journey-item{position:relative;padding:20px 12px;border:1px solid var(--line);background:var(--panel);min-height:105px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;font-weight:900;text-transform:uppercase}.journey-item:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);z-index:2;color:var(--teal);font-size:20px;background:var(--bg);padding:0 2px}.journey-item strong{display:block}.journey-item span{color:var(--teal)}
+.milestone{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px;align-items:center;border-top:1px solid var(--line);padding-top:55px}.milestone.reverse{grid-template-columns:1.15fr .85fr}.milestone.reverse .art{order:2}.milestone.reverse .copy{order:1}.date{color:var(--teal);font-weight:900;letter-spacing:3px;font-size:12px;text-transform:uppercase}.milestone h3{font-family:Anton,Impact,sans-serif;font-size:clamp(46px,6vw,76px);line-height:.92;margin:12px 0}.milestone h3 span{color:var(--teal)}.points{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.point{padding:10px 13px;border:1px solid var(--line);border-radius:999px;color:#c6d0d1;font-size:12px;font-weight:800;background:rgba(9,19,22,.8)}.art{min-height:330px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 50% 35%,rgba(24,240,206,.09),transparent 55%),#071013;display:flex;align-items:center;justify-content:center;overflow:hidden}.art img{max-width:82%;max-height:330px;object-fit:contain;display:block}.art.placeholder:before{content:"YOUR OFFICIAL ARTWORK";color:rgba(145,163,165,.55);font-size:11px;font-weight:900;letter-spacing:3px}.art.duo{gap:25px}.art.duo img{max-width:38%;max-height:250px}
+.ecosystem{padding:120px 0;text-align:center;background:radial-gradient(circle at 50% 30%,rgba(24,240,206,.12),transparent 45%),#071013}.ecosystem-map{max-width:1000px;margin:45px auto 0;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.node{padding:16px 20px;border:1px solid var(--teal);border-radius:14px;background:rgba(9,19,22,.9);font-weight:900}.arrow{color:var(--teal);font-weight:900}.final{padding:90px 0;text-align:center;border-top:1px solid var(--line)}.final h2{font-family:Anton,Impact,sans-serif;font-size:clamp(55px,8vw,105px);line-height:.9;margin:12px 0}.final h2 span{color:var(--teal)}.final p{color:var(--muted);font-size:18px}.btn{display:inline-flex;padding:15px 22px;border-radius:12px;background:var(--teal);color:#041012;font-weight:900;margin-top:20px}
+footer{padding:35px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:900px){.links{display:none}.mobile-menu{display:block}.journey{grid-template-columns:1fr 1fr 1fr}.journey-item:not(:last-child):after{display:none}.milestone,.milestone.reverse{grid-template-columns:1fr}.milestone.reverse .art,.milestone.reverse .copy{order:initial}.art{min-height:280px}.hero{padding-top:125px}}
+@media(max-width:520px){.wrap{padding:0 16px}.navin{height:66px;padding:0 16px}.journey{grid-template-columns:1fr}.section{padding:80px 0}.art{min-height:240px}.art.duo img{max-width:40%}}
+</style>
+</head>
+<body>
+<nav><div class="navin">
+<a class="brand" href="../">BROKE <em>CEO</em></a>
+<div class="links">
+<a href="../#story">The Story</a><a href="../#token">Token</a><a href="../#buy">How To Join</a><a href="../store/">Store</a><a href="../#board">The Board</a>
+</div>
+<details class="mobile-menu"><summary aria-label="Open navigation">☰</summary><div class="mobile-panel">
+<a href="../#story">The Story</a><a href="../#token">Token</a><a href="../#buy">How To Join</a><a href="../store/">Store</a><a href="../#board">The Board</a>
+</div></details>
+</div></nav>
+
+<main>
+<section class="hero"><div class="wrap">
+<div class="eyebrow">The official BROKE CEO roadmap</div>
+<h1 class="title">ROADMAP <span>&amp; ECOSYSTEM</span></h1>
+<div class="stroke"></div>
+<p class="lead">A broke CEO with a billion-dollar plan. Follow the journey from community participation to a connected BROKE CEO ecosystem.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="section-head"><div class="kicker">The Journey</div><h2 class="h2">FROM BROKE<br>TO BUILDING.</h2><p class="lead">Each stage is designed to connect with the next as the BROKE CEO universe evolves.</p></div>
+<div class="journey">
+<div class="journey-item"><span>BROKE<br>POINTS</span></div><div class="journey-item"><span>BROKE<br>STORE</span></div><div class="journey-item"><span>$CBROKE</span></div><div class="journey-item"><span>BROKE CEO<br>NFT</span></div><div class="journey-item"><span>BROKE</span></div><div class="journey-item"><span>RICH</span></div><div class="journey-item"><span>BOX</span></div><div class="journey-item"><span>COMPANY<br>NFT</span></div><div class="journey-item"><span>ECOSYSTEM</span></div>
+</div>
+</div></section>
+
+<section class="section alt"><div class="wrap">
+<div class="section-head"><div class="kicker">Q4 2026</div><h2 class="h2">THE<br><span style="color:var(--teal)">BEGINNING</span></h2><p class="lead">The community foundation starts before the token. BROKE Points and the BROKE Store are planned to be active before $CBROKE launches.</p></div>
+<div class="milestone">
+<div class="copy"><div class="date">01 — Community</div><h3>BROKE POINTS<br><span>+ STORE</span></h3><p class="lead">Points, leaderboard, missions and community participation. The Store becomes the first ecosystem destination for selected rewards, items and access.</p><div class="points"><div class="point">Points + Leaderboard</div><div class="point">Daily Missions</div><div class="point">BROKE Store</div></div></div>
+<div class="art"><div style="text-align:center"><div class="kicker">Community foundation</div><div style="font-family:Anton;font-size:48px;margin-top:12px">$0 → BUILD</div></div></div>
+</div>
+<div class="milestone reverse" style="margin-top:70px">
+<div class="copy"><div class="date">02 — Launch</div><h3>$CBROKE<br><span>+ BROKE NFT</span></h3><p class="lead">The planned token launch begins the collectible ecosystem, followed by the first BROKE CEO NFT collection.</p><div class="points"><div class="point">1B Planned Supply</div><div class="point">0% Team Allocation Planned</div><div class="point">First NFT</div></div></div>
+<div class="art duo"><img src="../assets/broke-ceo-avatar.png" alt="BROKE CEO"></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="milestone">
+<div class="copy"><div class="date">Q1 2027 — THE EVOLUTION</div><h3>BROKE <span>→</span> RICH</h3><p class="lead">Eligible BROKE NFTs are planned to evolve into the RICH stage through future mechanics. $CBROKE may become part of the evolution system alongside potential upgrades, burns and treasury interactions.</p><div class="points"><div class="point">NFT Evolution</div><div class="point">$CBROKE Integration</div><div class="point">Future Mechanics</div></div></div>
+<div class="art duo"><img src="../assets/broke-ceo-avatar.png" alt="BROKE CEO"><img src="../assets/rich-nft.png" alt="RICH NFT"></div>
+</div>
+</div></section>
+
+<section class="section alt"><div class="wrap">
+<div class="milestone reverse">
+<div class="copy"><div class="date">Q2 2027 — THE BOX</div><h3>THE <span>BOX</span></h3><p class="lead">The BOX Collection is planned as the bridge toward the Company stage. Boxes may contain assets, items, components, access elements or collectibles that can later connect to the ecosystem.</p><div class="points"><div class="point">Company Assets</div><div class="point">Business Items</div><div class="point">Special Assets</div><div class="point">Potential Store Utility</div></div></div>
+<div class="art"><img src="../assets/box-nft.png" alt="BROKE CEO BOX"></div>
+</div>
+</div></section>
+
+<section class="section"><div class="wrap">
+<div class="milestone">
+<div class="copy"><div class="date">Q3 2027 — THE COMPANY</div><h3>THE <span>COMPANY</span></h3><p class="lead">The COMPANY NFT Collection is planned as a major ecosystem milestone. Eligible Box assets may connect or integrate into the Company stage.</p><div class="points"><div class="point">COMPANY NFT</div><div class="point">Box Integration</div><div class="point">Connected Ecosystem</div></div></div>
+<div class="art"><img src="../assets/company-nft.png" alt="BROKE CEO COMPANY"></div>
+</div>
+</div></section>
+
+<section class="ecosystem"><div class="wrap">
+<div class="kicker">Q4 2027 — THE ECOSYSTEM</div><h2 class="h2">EVERYTHING<br><span style="color:var(--teal)">CONNECTS.</span></h2>
+<p class="lead" style="margin:0 auto">The planned direction is a connected BROKE CEO universe that continues to evolve beyond the initial roadmap.</p>
+<div class="ecosystem-map"><div class="node">BROKE POINTS</div><div class="arrow">→</div><div class="node">STORE</div><div class="arrow">→</div><div class="node">$CBROKE</div><div class="arrow">→</div><div class="node">NFTs</div><div class="arrow">→</div><div class="node">BOX</div><div class="arrow">→</div><div class="node">COMPANY</div></div>
+</div></section>
+
+<section class="final"><div class="wrap"><div class="kicker">The long-term vision</div><h2>FROM BROKE<br><span>TO BUILDING.</span></h2><p>The roadmap is a current direction. Dates, mechanics and features may evolve as BROKE CEO develops.</p><a class="btn" href="../">BACK TO BROKE CEO</a></div></section>
+</main>
+
+<footer><div class="wrap"><div class="foot"><strong>BROKE CEO © 2026</strong><span>$CBROKE • MEME COIN • COMING SOON</span></div></div></footer>
+</body>
+</html>
