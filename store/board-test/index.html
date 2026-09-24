@@ -49,7 +49,7 @@
     </div>
     <div class="card">
       <div class="section-title"><h2>One-Time Missions</h2><span class="label">REDEEM ONCE</span></div>
-      <div class="task"><div><h3>Connect X</h3><p>First connection reward.</p><button data-action="connect-x-test">Simulate test</button></div><div class="reward">+100</div></div>
+      <div class="task"><div><h3>Connect X</h3><p>Connect your X account once. Verified server-side.</p><button id="connectX">Connect X</button></div><div class="reward">+100</div></div>
       <div class="task"><div><h3>Follow BROKE CEO</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
       <div class="task"><div><h3>Like BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
       <div class="task"><div><h3>Reply to BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
@@ -89,9 +89,12 @@ async function loadUser(){
       nextBonus.textContent='All streak milestones completed.';
     }
     const dailyBtn=document.querySelector('[data-action="daily-checkin"]');
-    const connectXBtn=document.querySelector('[data-action="connect-x-test"]');
+    const connectXBtn=document.getElementById('connectX');
     if(dailyBtn&&data.missions?.daily_checkin_completed){dailyBtn.disabled=true;dailyBtn.textContent='Completed today'}
-    if(connectXBtn&&data.missions?.connect_x_test_completed){connectXBtn.disabled=true;connectXBtn.textContent='Test completed'}
+    if(connectXBtn&&data.x_connected){
+      connectXBtn.disabled=true;
+      connectXBtn.textContent='Connected @'+(data.x_profile?.username||data.twitter_username||'X');
+    }
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
@@ -133,6 +136,12 @@ async function claimMission(button){
 document.getElementById('load').addEventListener('click',loadUser);
 document.getElementById('reset').addEventListener('click',()=>{walletEl.value='TEST_WALLET_001';loadUser()});
 document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>claimMission(b)));
+document.getElementById('connectX').addEventListener('click',()=>{
+  const wallet=walletEl.value.trim();
+  if(!wallet)return setStatus('Enter a wallet address first.');
+  setStatus('Finish X authorization in the new tab, then click Load balance.');
+  window.open(API+'/x/connect?wallet='+encodeURIComponent(wallet),'_blank','noopener,noreferrer');
+});
 loadUser();
 </script>
 </body>
