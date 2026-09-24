@@ -274,7 +274,7 @@ const gateStatus=document.getElementById('gateStatus');
 
 document.getElementById('connectX').addEventListener('click',()=>{
   if(!wallet){location.href='/store/board-test/';return}
-  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet);
+  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
 });
 
 async function checkAccess(){
