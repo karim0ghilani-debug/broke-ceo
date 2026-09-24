@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BROKE POINTS — Private Test</title>
+<style>
+:root{--bg:#050b0d;--panel:#0a1417;--panel2:#0d191c;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.10),transparent 35%),linear-gradient(180deg,#071114,#050b0d 75%);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:28px 22px 70px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0 22px}.brand{font-weight:900;font-size:24px}.brand span{color:var(--teal)}.test{font-size:11px;font-weight:900;letter-spacing:2px;color:#071012;background:var(--teal);padding:8px 11px;border-radius:999px}.hero{padding:54px 0 30px}.kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:3px}.hero h1{font-size:clamp(48px,7vw,88px);line-height:.9;margin:14px 0 18px;letter-spacing:-4px}.hero h1 span{color:var(--teal)}.hero p{max-width:680px;color:var(--muted);line-height:1.6}.connect{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}.connect input{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);color:var(--text);padding:14px 16px;border-radius:10px;outline:none}.btn{border:1px solid var(--teal);background:var(--teal);color:#041012;font-weight:900;padding:13px 18px;border-radius:10px;cursor:pointer}.btn.secondary{background:transparent;color:var(--teal)}.status{color:var(--muted);font-size:13px;min-height:20px}.grid{display:grid;grid-template-columns:1fr 1.6fr;gap:18px;margin-top:25px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:24px}.label{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:900}.points{font-size:64px;font-weight:900;letter-spacing:-3px;margin:12px 0 2px}.points small{font-size:16px;color:var(--teal);letter-spacing:0}.sub{color:var(--muted);font-size:13px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.section-title h2{margin:0;font-size:20px}.task{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:17px 0;border-top:1px solid rgba(255,255,255,.07)}.task:first-of-type{border-top:0}.task h3{margin:0 0 5px;font-size:15px}.task p{margin:0;color:var(--muted);font-size:12px}.reward{color:var(--teal);font-weight:900;white-space:nowrap}.task button{margin-top:9px;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--teal);cursor:pointer;font-weight:800}.task button:disabled{opacity:.45;cursor:not-allowed}.note{margin-top:18px;color:var(--danger);font-size:11px;line-height:1.5}.check{color:var(--teal);font-weight:900}.bonus-list{margin-top:18px;display:grid;gap:8px}.bonus-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid rgba(255,255,255,.07);font-size:12px}.bonus-row span:first-child{color:var(--muted)}.bonus-row b{color:var(--teal)}.next-bonus{margin-top:14px;color:var(--teal);font-size:12px;font-weight:800}.footer{margin-top:25px;color:var(--muted);font-size:11px;text-align:center}@media(max-width:800px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:15px}.points{font-size:52px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div class="test">FREE TEST MODE</div></header>
+  <section class="hero">
+    <div class="kicker">BROKE CEO ECOSYSTEM</div>
+    <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
+    <p>This is the private board prototype. It connects to the existing BROKE POINTS API and is not linked from the public BROKE STORE.</p>
+    <div class="connect">
+      <input id="wallet" value="TEST_WALLET_001" placeholder="Wallet address">
+      <button class="btn" id="load">Load balance</button>
+      <button class="btn secondary" id="reset">Reset field</button>
+    </div>
+    <div class="status" id="status"></div>
+  </section>
+  <section class="grid">
+    <div class="card">
+      <div class="label">YOUR BROKE POINTS</div>
+      <div class="points" id="points">— <small>PTS</small></div>
+      <div class="sub" id="user">Not loaded</div>
+      <div style="margin-top:24px" class="label">DAILY STREAK</div>
+      <div style="font-size:30px;font-weight:900;margin-top:7px" id="streak">— days</div>
+      <div class="sub">Check-in will count consecutive daily completions.</div>
+      <div class="next-bonus" id="nextBonus">Next streak bonus: —</div>
+      <div class="bonus-list">
+        <div class="bonus-row"><span>7 day streak</span><b>+20 PTS</b></div>
+        <div class="bonus-row"><span>30 day streak</span><b>+200 PTS</b></div>
+        <div class="bonus-row"><span>90 day streak</span><b>+1,000 PTS</b></div>
+        <div class="bonus-row"><span>180 day streak</span><b>+5,000 PTS</b></div>
+        <div class="bonus-row"><span>365 day streak</span><b>+10,000 PTS</b></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h2>Daily Missions</h2><span class="label">5 PTS EACH</span></div>
+      <div class="sub" id="dailyPostInfo">Current daily mission post. Free mode does not use the paid X API.</div>
+      <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin">Complete test</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Like BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="like-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Repost BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="repost-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Reply to BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="reply-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h2>One-Time Missions</h2><span class="label">REDEEM ONCE</span></div>
+      <div class="task"><div><h3>Follow BROKE CEO</h3><p>Opens <a href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener" style="color:var(--teal)">@BrokeCEOcoin</a>. Claim this reward once.</p><button data-action="follow-broke-ceo" data-x-link="profile">Follow + claim</button></div><div class="reward">+50</div></div>
+    </div>
+    <div class="card">
+      <div class="label">FREE MISSION MODE</div>
+      <h2 style="margin:10px 0">No paid X API</h2>
+      <p class="sub">Mission buttons open the correct X page and award the configured points with server-side duplicate protection. No X API verification is used. Discord remains <span class="check">SOON</span>.</p>
+      <div class="note">FREE MODE NOTE: the system cannot prove that a user actually followed, liked, reposted or replied. It only prevents claiming the same reward more often than allowed.</div>
+    </div>
+  </section>
+  <div class="footer">BROKE CEO • PRIVATE DEVELOPMENT BOARD • NOT PUBLIC</div>
+</div>
+<script>
+const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
+const walletEl=document.getElementById('wallet');
+const pointsEl=document.getElementById('points');
+const userEl=document.getElementById('user');
+const statusEl=document.getElementById('status');
+let currentMissionPostUrl='';
+function setStatus(t){statusEl.textContent=t}
+async function loadUser(){
+  const wallet=walletEl.value.trim();
+  if(!wallet){setStatus('Enter a wallet address.');return}
+  setStatus('Loading…');
+  try{
+    const r=await fetch(API+'/user?wallet='+encodeURIComponent(wallet));
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'User not found');
+    pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+    userEl.textContent=data.wallet_address||wallet;
+    document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+    const nextBonus=document.getElementById('nextBonus');
+    if(data.next_streak_bonus){
+      nextBonus.textContent='Next streak bonus: '+Number(data.next_streak_bonus.days)+' days → +'+Number(data.next_streak_bonus.points).toLocaleString()+' PTS';
+    }else{
+      nextBonus.textContent='All streak milestones completed.';
+    }
+    const dailyBtn=document.querySelector('[data-action="daily-checkin"]');
+    if(dailyBtn&&data.missions?.daily_checkin_completed){dailyBtn.disabled=true;dailyBtn.textContent='Completed today'}
+
+    currentMissionPostUrl=data.x_daily_post_url||'';
+
+    const followBtn=document.querySelector('[data-action="follow-broke-ceo"]');
+    const likeBtn=document.querySelector('[data-action="like-post"]');
+    const repostBtn=document.querySelector('[data-action="repost-post"]');
+    const replyBtn=document.querySelector('[data-action="reply-post"]');
+
+    if(followBtn){
+      if(data.missions?.follow_broke_ceo_completed){followBtn.disabled=true;followBtn.textContent='Completed'}
+      else{followBtn.disabled=false;followBtn.textContent='Follow + claim'}
+    }
+
+    [likeBtn,repostBtn,replyBtn].filter(Boolean).forEach(b=>{
+      const mission=b.dataset.action;
+      const done=mission==='like-post'?data.missions?.like_post_completed:mission==='repost-post'?data.missions?.repost_post_completed:data.missions?.reply_post_completed;
+      if(done){b.disabled=true;b.textContent='Completed today';return}
+      if(!currentMissionPostUrl){b.disabled=true;b.textContent='Post not set';return}
+      b.disabled=false;b.textContent='Open X + claim';
+    });
+
+    const postInfo=document.getElementById('dailyPostInfo');
+    if(currentMissionPostUrl){
+      postInfo.innerHTML='Daily X post: <a href="'+currentMissionPostUrl+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a> • Free mode';
+    }else{
+      postInfo.textContent='Daily mission post is not set yet.';
+    }
+    setStatus('Balance loaded successfully.');
+  }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
+}
+async function claimMission(button){
+  const wallet=walletEl.value.trim();
+  const mission=button.dataset.action;
+  if(!wallet)return setStatus('Enter a wallet address first.');
+  const xLink=button.dataset.xLink;
+  if(xLink==='profile'){
+    window.open('https://x.com/BrokeCEOcoin','_blank','noopener,noreferrer');
+  }else if(xLink==='post'){
+    if(!currentMissionPostUrl)return setStatus('Daily mission post is not set.');
+    window.open(currentMissionPostUrl,'_blank','noopener,noreferrer');
+  }
+  button.disabled=true;setStatus('Claiming mission…');
+  try{
+    const r=await fetch(API+'/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
+    const data=await r.json();
+    if(!r.ok){
+      if(data.code==='ALREADY_CLAIMED'){
+        pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+        document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+        if(data.next_streak_bonus){
+          document.getElementById('nextBonus').textContent='Next streak bonus: '+Number(data.next_streak_bonus.days)+' days → +'+Number(data.next_streak_bonus.points).toLocaleString()+' PTS';
+        }
+        button.textContent=mission==='follow-broke-ceo'?'Completed':'Completed today';
+        return setStatus('Mission already completed.');
+      }
+      throw new Error(data.error||'Mission failed');
+    }
+    pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+    document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+    if(data.next_streak_bonus){
+      document.getElementById('nextBonus').textContent='Next streak bonus: '+Number(data.next_streak_bonus.days)+' days → +'+Number(data.next_streak_bonus.points).toLocaleString()+' PTS';
+    }else{
+      document.getElementById('nextBonus').textContent='All streak milestones completed.';
+    }
+    if(Number(data.streak_bonus_points||0)>0){
+      setStatus('Daily mission: +'+Number(data.points_added||0)+' PTS • Streak bonus: +'+Number(data.streak_bonus_points).toLocaleString()+' PTS!');
+    }else{
+      setStatus('Mission completed: +'+Number(data.points_added||0)+' points.');
+    }
+    button.textContent=mission==='follow-broke-ceo'?'Completed':'Completed today';
+  }catch(e){setStatus(e.message);button.disabled=false}
+}
+document.getElementById('load').addEventListener('click',loadUser);
+document.getElementById('reset').addEventListener('click',()=>{walletEl.value='TEST_WALLET_001';loadUser()});
+document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>claimMission(b)));
+
+loadUser();
+</script>
+</body>
+</html>
