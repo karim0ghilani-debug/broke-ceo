@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div class="test">FREE TEST MODE</div></header>
+  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a id="profileLink" href="/profile-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">MY PROFILE</a><a href="/leaderboard-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">LEADERBOARD</a><div class="test">FREE TEST MODE</div></div></header>
   <section class="hero">
     <div class="kicker">BROKE CEO ECOSYSTEM</div>
     <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
@@ -64,6 +64,8 @@
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
 const walletEl=document.getElementById('wallet');
+const urlWallet=new URLSearchParams(location.search).get('wallet');
+if(urlWallet)walletEl.value=urlWallet;
 const pointsEl=document.getElementById('points');
 const userEl=document.getElementById('user');
 const statusEl=document.getElementById('status');
@@ -115,6 +117,7 @@ async function loadUser(){
     }else{
       postInfo.textContent='Daily mission post is not set yet.';
     }
+    const profileLink=document.getElementById('profileLink');if(profileLink)profileLink.href='/profile-test/?wallet='+encodeURIComponent(wallet);
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
