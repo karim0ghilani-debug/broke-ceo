@@ -281,6 +281,23 @@ document.getElementById('connectX').addEventListener('click',()=>{
   location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
 });
 
+async function switchXAccount(){
+  if(!wallet)return;
+  gateStatus.textContent='Disconnecting X…';
+  try{
+    const r=await fetch(API+'/x/disconnect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Could not disconnect X');
+    location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
+  }catch(e){gateStatus.textContent=e.message}
+}
+function logoutWebsite(){
+  localStorage.removeItem('broke_wallet');
+  location.href='/';
+}
+document.getElementById('switchX').addEventListener('click',switchXAccount);
+document.getElementById('logout').addEventListener('click',logoutWebsite);
+
 async function checkAccess(){
   if(!wallet){
     gateStatus.textContent='Open BROKE POINTS first, then connect X.';
