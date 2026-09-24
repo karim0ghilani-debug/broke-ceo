@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BROKE POINTS — Private Test</title>
+<style>
+:root{--bg:#050b0d;--panel:#0a1417;--panel2:#0d191c;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.10),transparent 35%),linear-gradient(180deg,#071114,#050b0d 75%);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}button,input{font:inherit}.wrap{max-width:1180px;margin:auto;padding:28px 22px 70px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0 22px}.brand{font-weight:900;font-size:24px}.brand span{color:var(--teal)}.test{font-size:11px;font-weight:900;letter-spacing:2px;color:#071012;background:var(--teal);padding:8px 11px;border-radius:999px}.hero{padding:54px 0 30px}.kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:3px}.hero h1{font-size:clamp(48px,7vw,88px);line-height:.9;margin:14px 0 18px;letter-spacing:-4px}.hero h1 span{color:var(--teal)}.hero p{max-width:680px;color:var(--muted);line-height:1.6}.connect{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0}.connect input{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);color:var(--text);padding:14px 16px;border-radius:10px;outline:none}.btn{border:1px solid var(--teal);background:var(--teal);color:#041012;font-weight:900;padding:13px 18px;border-radius:10px;cursor:pointer}.btn.secondary{background:transparent;color:var(--teal)}.status{color:var(--muted);font-size:13px;min-height:20px}.grid{display:grid;grid-template-columns:1fr 1.6fr;gap:18px;margin-top:25px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:24px}.label{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:900}.points{font-size:64px;font-weight:900;letter-spacing:-3px;margin:12px 0 2px}.points small{font-size:16px;color:var(--teal);letter-spacing:0}.sub{color:var(--muted);font-size:13px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.section-title h2{margin:0;font-size:20px}.task{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:17px 0;border-top:1px solid rgba(255,255,255,.07)}.task:first-of-type{border-top:0}.task h3{margin:0 0 5px;font-size:15px}.task p{margin:0;color:var(--muted);font-size:12px}.reward{color:var(--teal);font-weight:900;white-space:nowrap}.task button{margin-top:9px;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--teal);cursor:pointer;font-weight:800}.task button:disabled{opacity:.45;cursor:not-allowed}.note{margin-top:18px;color:var(--danger);font-size:11px;line-height:1.5}.check{color:var(--teal);font-weight:900}.footer{margin-top:25px;color:var(--muted);font-size:11px;text-align:center}@media(max-width:800px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:15px}.points{font-size:52px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div class="test">PRIVATE TEST MODE</div></header>
+  <section class="hero">
+    <div class="kicker">BROKE CEO ECOSYSTEM</div>
+    <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
+    <p>This is the private board prototype. It connects to the existing BROKE POINTS API and is not linked from the public BROKE STORE.</p>
+    <div class="connect">
+      <input id="wallet" value="TEST_WALLET_001" placeholder="Wallet address">
+      <button class="btn" id="load">Load balance</button>
+      <button class="btn secondary" id="reset">Reset field</button>
+    </div>
+    <div class="status" id="status"></div>
+  </section>
+  <section class="grid">
+    <div class="card">
+      <div class="label">YOUR BROKE POINTS</div>
+      <div class="points" id="points">— <small>PTS</small></div>
+      <div class="sub" id="user">Not loaded</div>
+      <div style="margin-top:24px" class="label">DAILY STREAK</div>
+      <div style="font-size:30px;font-weight:900;margin-top:7px" id="streak">— days</div>
+      <div class="sub">Check-in will count consecutive daily completions.</div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h2>Daily Missions</h2><span class="label">1 PT EACH</span></div>
+      <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin" data-points="1">Complete test</button></div><div class="reward">+1</div></div>
+      <div class="task"><div><h3>Like BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
+      <div class="task"><div><h3>Retweet BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
+      <div class="task"><div><h3>Reply to BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title"><h2>One-Time Missions</h2><span class="label">REDEEM ONCE</span></div>
+      <div class="task"><div><h3>Connect X</h3><p>First connection reward.</p><button data-action="connect-x" data-points="100">Simulate test</button></div><div class="reward">+100</div></div>
+      <div class="task"><div><h3>Follow BROKE CEO</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
+      <div class="task"><div><h3>Like BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
+      <div class="task"><div><h3>Reply to BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
+      <div class="task"><div><h3>Retweet BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
+    </div>
+    <div class="card">
+      <div class="label">COMING NEXT</div>
+      <h2 style="margin:10px 0">X Profile Sync</h2>
+      <p class="sub">When the real X OAuth connection is added, the user's X profile picture and username will populate automatically. Discord will remain marked <span class="check">SOON</span> until it is created.</p>
+      <div class="note">TEST MODE NOTE: the current /api/points endpoint accepts a wallet and amount directly. Before public launch, rewards must be moved behind server-side mission verification so users cannot award themselves arbitrary points.</div>
+    </div>
+  </section>
+  <div class="footer">BROKE CEO • PRIVATE DEVELOPMENT BOARD • NOT PUBLIC</div>
+</div>
+<script>
+const API='/api';
+const walletEl=document.getElementById('wallet');
+const pointsEl=document.getElementById('points');
+const userEl=document.getElementById('user');
+const statusEl=document.getElementById('status');
+function setStatus(t){statusEl.textContent=t}
+async function loadUser(){
+  const wallet=walletEl.value.trim();
+  if(!wallet){setStatus('Enter a wallet address.');return}
+  setStatus('Loading…');
+  try{
+    const r=await fetch(API+'/user?wallet='+encodeURIComponent(wallet));
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||'User not found');
+    pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+    userEl.textContent=data.wallet_address||wallet;
+    setStatus('Balance loaded successfully.');
+  }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
+}
+async function addTestPoints(button){
+  const wallet=walletEl.value.trim();
+  const amount=Number(button.dataset.points);
+  const reason=button.dataset.action;
+  if(!wallet)return setStatus('Enter a wallet address first.');
+  button.disabled=true;setStatus('Submitting test reward…');
+  try{
+    const r=await fetch(API+'/points',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,amount,reason})});
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.error||'Reward failed');
+    pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+    setStatus('Test reward added: +'+amount+' points.');
+    button.textContent='Test completed';
+  }catch(e){setStatus(e.message);button.disabled=false}
+}
+document.getElementById('load').addEventListener('click',loadUser);
+document.getElementById('reset').addEventListener('click',()=>{walletEl.value='TEST_WALLET_001';loadUser()});
+document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>addTestPoints(b)));
+loadUser();
+</script>
+</body>
+</html>
