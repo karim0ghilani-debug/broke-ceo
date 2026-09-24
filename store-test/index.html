@@ -92,6 +92,8 @@
     .links a{color:#c6d0d1}
     .links a:hover{color:var(--teal)}
 
+    .account-actions{display:flex;align-items:center;gap:8px}.accountbtn{padding:10px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-weight:800;cursor:pointer}.accountbtn:hover{color:var(--teal);border-color:var(--teal)}
+
     .navbtn{
       padding:12px 19px;
       border:1px solid var(--teal);
@@ -229,9 +231,11 @@
         <a href="/#board">The Board</a>
       </div>
 
-      <a class="navbtn" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">
-        $CBROKE
-      </a>
+      <div class="account-actions">
+        <button class="accountbtn" id="switchX">Switch X</button>
+        <button class="accountbtn" id="logout">Log out</button>
+        <a class="navbtn" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">$CBROKE</a>
+      </div>
     </div>
   </nav>
 
