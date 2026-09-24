@@ -134,6 +134,22 @@ async function loadProfile(){
     statusEl.textContent='Profile loaded.';
   }catch(e){statusEl.textContent=e.message}
 }
+async function switchXAccount(){
+  if(!wallet)return;
+  statusEl.textContent='Disconnecting X…';
+  try{
+    const r=await fetch(API+'/x/disconnect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Could not disconnect X');
+    location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=profile';
+  }catch(e){statusEl.textContent=e.message}
+}
+function logoutWebsite(){
+  localStorage.removeItem('broke_wallet');
+  location.href='/';
+}
+document.getElementById('switchX').addEventListener('click',switchXAccount);
+document.getElementById('logout').addEventListener('click',logoutWebsite);
 loadProfile();
 </script>
 </body>
