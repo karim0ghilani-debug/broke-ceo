@@ -74,7 +74,7 @@ const protectedEl=document.getElementById('protected');
 const gateStatus=document.getElementById('gateStatus');
 document.getElementById('connectX').addEventListener('click',()=>{
   if(!wallet){location.href='/store/board-test/';return}
-  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet);
+  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=profile';
 });
 const avatarEl=document.getElementById('avatar');
 avatarEl.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0d191c"/><circle cx="50" cy="38" r="18" fill="#18f0ce"/><path d="M18 92c3-25 18-36 32-36s29 11 32 36" fill="#18f0ce"/></svg>');
