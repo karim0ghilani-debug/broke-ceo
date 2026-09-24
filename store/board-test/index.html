@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a id="profileLink" href="/profile-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">MY PROFILE</a><a href="/leaderboard-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">LEADERBOARD</a><div class="test">FREE TEST MODE</div></div></header>
+  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><a id="profileLink" href="/profile-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">MY PROFILE</a><a id="storeLink" href="/store/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">STORE</a><a href="/leaderboard-test/" style="color:var(--teal);font-size:11px;font-weight:900;text-decoration:none;border:1px solid var(--line);padding:8px 10px;border-radius:9px">LEADERBOARD</a><div class="test">FREE TEST MODE</div></div></header>
   <section class="hero">
     <div class="kicker">BROKE CEO ECOSYSTEM</div>
     <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
@@ -117,7 +117,9 @@ async function loadUser(){
     }else{
       postInfo.textContent='Daily mission post is not set yet.';
     }
+    localStorage.setItem('broke_wallet',wallet);
     const profileLink=document.getElementById('profileLink');if(profileLink)profileLink.href='/profile-test/?wallet='+encodeURIComponent(wallet);
+    const storeLink=document.getElementById('storeLink');if(storeLink)storeLink.href='/store/?wallet='+encodeURIComponent(wallet);
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
