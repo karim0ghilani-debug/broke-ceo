@@ -92,6 +92,8 @@
     .links a{color:#c6d0d1}
     .links a:hover{color:var(--teal)}
 
+    .account-actions{display:flex;align-items:center;gap:7px}.accountbtn{display:inline-flex;align-items:center;justify-content:center;height:30px;padding:0 10px;border-radius:999px;border:1px solid rgba(24,240,206,.18);background:rgba(255,255,255,.02);color:#a9bbbd;font-size:10px;font-weight:800;letter-spacing:.02em;cursor:pointer;transition:.2s ease}.accountbtn:hover{color:var(--teal);border-color:var(--teal);background:rgba(24,240,206,.08)}.accountbtn.logout{border-color:rgba(255,98,98,.20);color:#c8a5a5}.accountbtn.logout:hover{color:#ff7b7b;border-color:#ff7b7b;background:rgba(255,98,98,.08)}
+
     .navbtn{
       padding:12px 19px;
       border:1px solid var(--teal);
@@ -229,9 +231,11 @@
         <a href="/#board">The Board</a>
       </div>
 
-      <a class="navbtn" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">
-        $CBROKE
-      </a>
+      <div class="account-actions">
+        <button class="accountbtn" id="switchX">Switch X</button>
+        <button class="accountbtn logout" id="logout">Log out</button>
+        <a class="navbtn" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">$CBROKE</a>
+      </div>
     </div>
   </nav>
 
@@ -276,6 +280,23 @@ document.getElementById('connectX').addEventListener('click',()=>{
   if(!wallet){location.href='/store/board-test/';return}
   location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
 });
+
+async function switchXAccount(){
+  if(!wallet)return;
+  gateStatus.textContent='Disconnecting X…';
+  try{
+    const r=await fetch(API+'/x/disconnect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Could not disconnect X');
+    location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
+  }catch(e){gateStatus.textContent=e.message}
+}
+function logoutWebsite(){
+  localStorage.removeItem('broke_wallet');
+  location.href='/';
+}
+document.getElementById('switchX').addEventListener('click',switchXAccount);
+document.getElementById('logout').addEventListener('click',logoutWebsite);
 
 async function checkAccess(){
   if(!wallet){
