@@ -1,60 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="BROKE BOARD — BROKE POINTS, community tasks and leaderboard." />
-  <title>BROKE BOARD — BROKE CEO</title>
-  <link rel="icon" type="image/png" href="/assets/broke-ceo-avatar.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#050b0d;--panel:#091316;--panel2:#0d1b1e;--text:#f5f7f7;--muted:#91a3a5;--teal:#18f0ce;--red:#ff3d4d;--gold:#f7c843;--line:rgba(24,240,206,.18);--max:1180px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.10),transparent 30%),linear-gradient(180deg,#071114,#050b0d 75%);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}
-    nav{position:fixed;z-index:20;top:0;left:0;right:0;background:rgba(5,11,13,.84);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-    .navin{height:76px;display:flex;align-items:center;justify-content:space-between;max-width:var(--max);margin:auto;padding:0 24px}.brand{font-weight:900;letter-spacing:-1px;font-size:22px}.brand em{font-style:normal;color:var(--teal)}.links{display:flex;gap:24px;font-size:13px;font-weight:800;text-transform:uppercase}.links a{color:#c6d0d1}.links a:hover{color:var(--teal)}.navbtn{padding:12px 19px;border:1px solid var(--teal);border-radius:999px;color:var(--teal);font-weight:900;box-shadow:0 0 22px rgba(24,240,206,.14)}
-    main{padding:140px 24px 80px}.wrap{max-width:var(--max);margin:auto}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:stretch}.hero-card,.side-card,.panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(13,27,30,.94),rgba(7,16,19,.94));box-shadow:0 24px 70px rgba(0,0,0,.28)}.hero-card{padding:44px;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;width:260px;height:260px;right:-100px;top:-100px;border-radius:50%;background:rgba(24,240,206,.08);filter:blur(4px)}.kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:4px;text-transform:uppercase}.title{font-family:Anton,Impact,sans-serif;font-size:clamp(64px,9vw,112px);line-height:.86;letter-spacing:-2px;margin:14px 0 18px}.title span{color:var(--teal)}.stroke{height:9px;width:150px;background:var(--teal);transform:skewX(-18deg);margin:24px 0}.lead{color:var(--muted);font-size:17px;line-height:1.7;max-width:680px}.points{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-top:32px}.points strong{font-family:Anton,Impact,sans-serif;font-size:58px;line-height:.9;color:var(--teal)}.points small{display:block;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}.connect{display:inline-flex;padding:14px 20px;border-radius:11px;background:var(--teal);color:#041012;font-weight:900;box-shadow:0 0 30px rgba(24,240,206,.18)}
-    .side-card{padding:28px;display:flex;flex-direction:column;justify-content:space-between}.avatar{width:96px;height:96px;border-radius:18px;border:2px solid var(--teal);object-fit:cover;margin-bottom:22px}.side-card h2{font-family:Anton,Impact,sans-serif;font-size:38px;line-height:.95;margin:0 0 12px}.side-card p{color:var(--muted);line-height:1.6;margin:0}.status{margin-top:25px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:rgba(24,240,206,.05);font-size:12px;font-weight:800;color:#b9c5c6}.status b{color:var(--teal)}
-    .section{margin-top:22px}.panel{padding:30px}.head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}.head h2{font-family:Anton,Impact,sans-serif;font-size:50px;line-height:.9;margin:8px 0 0}.head p{color:var(--muted);font-size:13px;margin:0;text-align:right}.tasks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.task{padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.task .num{color:var(--teal);font-size:11px;font-weight:900;letter-spacing:2px}.task h3{font-size:19px;margin:10px 0 7px}.task p{color:var(--muted);font-size:13px;line-height:1.55;min-height:40px;margin:0 0 17px}.reward{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(24,240,206,.10)}.reward b{color:var(--teal)}.task button{border:1px solid var(--teal);background:transparent;color:var(--teal);border-radius:9px;padding:9px 12px;font-weight:900;cursor:pointer}.task button:hover{background:rgba(24,240,206,.08)}
-    .board-table{width:100%;border-collapse:collapse}.board-table th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:2px;text-align:left;padding:0 14px 13px}.board-table td{padding:15px 14px;border-top:1px solid rgba(24,240,206,.10);font-size:14px}.rank{color:var(--teal);font-weight:900;width:70px}.user{font-weight:900}.score{font-family:Anton,Impact,sans-serif;font-size:22px;color:var(--teal);text-align:right}.you{background:rgba(24,240,206,.05)}.empty{padding:34px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}.notice{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.6}.notice b{color:#dce5e6}
-    footer{padding:30px 24px 48px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}.foot{max-width:var(--max);margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot strong{color:var(--text)}
-    @media(max-width:900px){.links{display:none}.hero{grid-template-columns:1fr}.tasks{grid-template-columns:1fr}.navbtn{padding:10px 14px}.hero-card{padding:32px}.head{align-items:start;flex-direction:column}.head p{text-align:left}.board-table th:nth-child(3),.board-table td:nth-child(3){display:none}}
-    @media(max-width:520px){main{padding:115px 16px 60px}.navin{height:66px;padding:0 16px}.hero-card,.side-card,.panel{padding:22px}.points{align-items:start;flex-direction:column}.points strong{font-size:50px}.board-table th,.board-table td{padding:13px 7px}.head h2{font-size:42px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="BROKE BOARD — coming soon.">
+<title>BROKE BOARD — BROKE CEO</title>
+<link rel="icon" type="image/png" href="/assets/broke-ceo-avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b0d;--text:#f5f7f7;--muted:#91a3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--max:1180px}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 25%,rgba(24,240,206,.12),transparent 34%),linear-gradient(180deg,#071114,#050b0d);color:var(--text);font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column}a{color:inherit;text-decoration:none}nav{border-bottom:1px solid var(--line);background:rgba(5,11,13,.84);backdrop-filter:blur(14px)}.navin{height:76px;max-width:var(--max);margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:22px;font-weight:900;letter-spacing:-1px}.brand em{font-style:normal;color:var(--teal)}.back{font-size:13px;font-weight:900;text-transform:uppercase;color:#c6d0d1}.back:hover{color:var(--teal)}main{flex:1;display:flex;align-items:center;justify-content:center;padding:70px 24px}.card{width:100%;max-width:900px;text-align:center;padding:80px 40px;border:1px solid var(--line);border-radius:28px;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.11),transparent 45%),rgba(7,16,19,.88);box-shadow:0 30px 90px rgba(0,0,0,.45)}.avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--teal);box-shadow:0 0 35px rgba(24,240,206,.14);margin-bottom:25px}.kicker{color:var(--teal);font-size:12px;font-weight:900;letter-spacing:5px;text-transform:uppercase}.title{font-family:Anton,Impact,sans-serif;font-size:clamp(72px,12vw,150px);line-height:.84;letter-spacing:-3px;margin:16px 0}.title span{color:var(--teal)}.line{height:10px;width:180px;background:var(--teal);transform:skewX(-18deg);margin:30px auto}.tag{font-family:Anton,Impact,sans-serif;font-size:clamp(28px,4vw,48px);line-height:1;margin:0 0 18px}.description{max-width:620px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.7}.soon{display:inline-flex;margin-top:34px;padding:16px 30px;border-radius:12px;background:var(--teal);color:#041012;font-weight:900;box-shadow:0 0 35px rgba(24,240,206,.22)}footer{padding:30px 24px 45px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center}@media(max-width:600px){.navin{height:66px;padding:0 16px}.card{padding:55px 22px}.avatar{width:90px;height:90px}.back{font-size:11px}}
+</style>
 </head>
 <body>
-<nav><div class="navin"><a class="brand" href="/">BROKE <em>CEO</em></a><div class="links"><a href="/#story">The Story</a><a href="/#token">Token</a><a href="/store/">Store</a><a href="/roadmap/">Roadmap</a><a href="/board/">The Board</a></div><a class="navbtn" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">$CBROKE</a></div></nav>
-<main><div class="wrap">
-  <div class="hero">
-    <section class="hero-card">
-      <div class="kicker">BROKE CEO ECOSYSTEM</div>
-      <h1 class="title">THE <span>BOARD</span></h1>
-      <div class="stroke"></div>
-      <p class="lead">Welcome to the public BROKE BOARD — the home of BROKE POINTS, community tasks and the leaderboard. Earn points, climb the board and use your points across the BROKE ecosystem.</p>
-      <div class="points"><div><small>Your BROKE POINTS</small><strong>—</strong></div><a class="connect" href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener">CONNECT X →</a></div>
-    </section>
-    <aside class="side-card"><div><img class="avatar" src="/assets/broke-ceo-avatar.png" alt="BROKE CEO avatar"><div class="kicker">BOARD STATUS</div><h2>NO MONEY.<br>STILL CEO.</h2><p>Points are designed to reward participation in the BROKE CEO community.</p></div><div class="status"><b>LIVE BOARD</b> · leaderboard interface ready</div></aside>
-  </div>
-
-  <section class="section panel"><div class="head"><div><div class="kicker">BROKE POINTS</div><h2>DAILY GRIND</h2></div><p>Complete tasks. Stack points. Repeat.</p></div><div class="tasks">
-    <article class="task"><div class="num">01 — SOCIAL</div><h3>Follow BROKE CEO</h3><p>Connect with the official X account and stay in the loop.</p><div class="reward"><b>+100 POINTS</b><button type="button" data-action="connect">CONNECT</button></div></article>
-    <article class="task"><div class="num">02 — COMMUNITY</div><h3>Join the Discord</h3><p>Become part of the community and unlock future ecosystem tasks.</p><div class="reward"><b>+150 POINTS</b><button type="button" data-action="discord">JOIN</button></div></article>
-    <article class="task"><div class="num">03 — DAILY</div><h3>Daily check-in</h3><p>Come back each day and keep your BROKE POINTS streak alive.</p><div class="reward"><b>+50 POINTS</b><button type="button" data-action="daily">CHECK IN</button></div></article>
-  </div><p class="notice"><b>Important:</b> task rewards and balances shown here are the interface structure. Verified account balances should come from the live BROKE POINTS backend once connected.</p></section>
-
-  <section class="section panel"><div class="head"><div><div class="kicker">LEADERBOARD</div><h2>WHO'S BROKE?</h2></div><p>Top community members by BROKE POINTS</p></div><div class="empty">The live leaderboard will appear here when the BROKE POINTS backend is connected.</div></section>
-</div></main>
-<footer><div class="foot"><strong>BROKE CEO © 2026</strong><span>$CBROKE • BROKE POINTS • THE BOARD</span></div></footer>
-<script>
-  document.querySelectorAll('[data-action]').forEach(button => {
-    button.addEventListener('click', () => {
-      const action = button.dataset.action;
-      if(action === 'connect') window.open('https://x.com/BrokeCEOcoin','_blank','noopener');
-      if(action === 'discord') alert('Discord task will be connected to the BROKE POINTS backend.');
-      if(action === 'daily') alert('Daily check-in will be connected to the BROKE POINTS backend.');
-    });
-  });
-</script>
+<nav><div class="navin"><a class="brand" href="/">BROKE <em>CEO</em></a><a class="back" href="/">← Back to BROKE CEO</a></div></nav>
+<main><section class="card"><img class="avatar" src="/assets/broke-ceo-avatar.png" alt="BROKE CEO"><div class="kicker">BROKE CEO ECOSYSTEM</div><h1 class="title">THE <span>BOARD</span></h1><div class="line"></div><p class="tag">COMING SOON.</p><p class="description">The BROKE BOARD is being built. BROKE POINTS, community tasks and the leaderboard are coming soon.</p><div class="soon">COMING SOON</div></section></main>
+<footer>BROKE CEO © 2026 • $CBROKE • THE BOARD</footer>
 </body>
 </html>
