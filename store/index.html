@@ -202,10 +202,20 @@
       main{padding:125px 16px 70px}
       .store{padding:55px 22px}
     }
-  </style>
+  .gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}.gate-card{width:min(520px,100%);text-align:center;background:linear-gradient(180deg,#0e1a1d,#091316);border:1px solid var(--line);border-radius:24px;padding:44px 28px;box-shadow:0 30px 90px rgba(0,0,0,.45)}.gate-card h1{font-family:Anton,Impact,sans-serif;font-size:clamp(54px,9vw,92px);line-height:.9;margin:12px 0}.gate-card h1 span{color:var(--teal)}.gate-card p{color:var(--muted);line-height:1.6}.gate-kicker{color:var(--teal);font-size:11px;font-weight:900;letter-spacing:3px}.xbtn{display:inline-block;margin-top:18px;background:var(--teal);color:#041012;border:0;border-radius:12px;padding:15px 24px;font-weight:900;cursor:pointer}.gate-status{min-height:18px;margin-top:12px;color:var(--muted);font-size:12px}.protected{display:none}</style>
 </head>
 
 <body>
+  <div id="authGate" class="gate">
+    <div class="gate-card">
+      <div class="gate-kicker">BROKE CEO MEMBERS</div>
+      <h1>CONNECT <span>X</span></h1>
+      <p>Connect your X account to enter the BROKE STORE.</p>
+      <button class="xbtn" id="connectX">Connect X</button>
+      <div class="gate-status" id="gateStatus"></div>
+    </div>
+  </div>
+  <div id="protected" class="protected">
   <nav>
     <div class="navin">
       <a class="brand" href="/">
@@ -253,5 +263,41 @@
   <footer>
     BROKE CEO © 2026 • $CBROKE • BROKE STORE
   </footer>
+  </div>
+<script>
+const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
+const params=new URLSearchParams(location.search);
+const wallet=params.get('wallet')||localStorage.getItem('broke_wallet')||'';
+const gate=document.getElementById('authGate');
+const protectedEl=document.getElementById('protected');
+const gateStatus=document.getElementById('gateStatus');
+
+document.getElementById('connectX').addEventListener('click',()=>{
+  if(!wallet){location.href='/store/board-test/';return}
+  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet);
+});
+
+async function checkAccess(){
+  if(!wallet){
+    gateStatus.textContent='Open BROKE POINTS first, then connect X.';
+    return;
+  }
+  localStorage.setItem('broke_wallet',wallet);
+  try{
+    const r=await fetch(API+'/user?wallet='+encodeURIComponent(wallet));
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Could not check access');
+    if(!d.x_connected){
+      gateStatus.textContent='Connect X to enter the store.';
+      return;
+    }
+    gate.style.display='none';
+    protectedEl.style.display='block';
+  }catch(e){
+    gateStatus.textContent=e.message;
+  }
+}
+checkAccess();
+</script>
 </body>
 </html>
