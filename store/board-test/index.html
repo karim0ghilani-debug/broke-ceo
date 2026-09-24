@@ -34,14 +34,14 @@
     </div>
     <div class="card">
       <div class="section-title"><h2>Daily Missions</h2><span class="label">1 PT EACH</span></div>
-      <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin" data-points="1">Complete test</button></div><div class="reward">+1</div></div>
+      <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin">Complete test</button></div><div class="reward">+1</div></div>
       <div class="task"><div><h3>Like BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
       <div class="task"><div><h3>Retweet BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
       <div class="task"><div><h3>Reply to BROKE CEO post</h3><p>Verification will be added before launch.</p><button disabled>Checker pending</button></div><div class="reward">+1</div></div>
     </div>
     <div class="card">
       <div class="section-title"><h2>One-Time Missions</h2><span class="label">REDEEM ONCE</span></div>
-      <div class="task"><div><h3>Connect X</h3><p>First connection reward.</p><button data-action="connect-x" data-points="100">Simulate test</button></div><div class="reward">+100</div></div>
+      <div class="task"><div><h3>Connect X</h3><p>First connection reward.</p><button data-action="connect-x-test">Simulate test</button></div><div class="reward">+100</div></div>
       <div class="task"><div><h3>Follow BROKE CEO</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
       <div class="task"><div><h3>Like BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
       <div class="task"><div><h3>Reply to BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
@@ -51,7 +51,7 @@
       <div class="label">COMING NEXT</div>
       <h2 style="margin:10px 0">X Profile Sync</h2>
       <p class="sub">When the real X OAuth connection is added, the user's X profile picture and username will populate automatically. Discord will remain marked <span class="check">SOON</span> until it is created.</p>
-      <div class="note">TEST MODE NOTE: the current /api/points endpoint accepts a wallet and amount directly. Before public launch, rewards must be moved behind server-side mission verification so users cannot award themselves arbitrary points.</div>
+      <div class="note">TEST MODE NOTE: direct point awards are disabled. Test rewards now go through server-side mission rules with duplicate protection. Real X verification is still required before public launch.</div>
     </div>
   </section>
   <div class="footer">BROKE CEO • PRIVATE DEVELOPMENT BOARD • NOT PUBLIC</div>
@@ -73,27 +73,40 @@ async function loadUser(){
     if(!r.ok) throw new Error(data.error||'User not found');
     pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
     userEl.textContent=data.wallet_address||wallet;
+    document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+    const dailyBtn=document.querySelector('[data-action="daily-checkin"]');
+    const connectXBtn=document.querySelector('[data-action="connect-x-test"]');
+    if(dailyBtn&&data.missions?.daily_checkin_completed){dailyBtn.disabled=true;dailyBtn.textContent='Completed today'}
+    if(connectXBtn&&data.missions?.connect_x_test_completed){connectXBtn.disabled=true;connectXBtn.textContent='Test completed'}
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
-async function addTestPoints(button){
+async function claimMission(button){
   const wallet=walletEl.value.trim();
-  const amount=Number(button.dataset.points);
-  const reason=button.dataset.action;
+  const mission=button.dataset.action;
   if(!wallet)return setStatus('Enter a wallet address first.');
-  button.disabled=true;setStatus('Submitting test reward…');
+  button.disabled=true;setStatus('Submitting mission…');
   try{
-    const r=await fetch(API+'/points',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,amount,reason})});
+    const r=await fetch(API+'/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
     const data=await r.json();
-    if(!r.ok)throw new Error(data.error||'Reward failed');
+    if(!r.ok){
+      if(data.code==='ALREADY_CLAIMED'){
+        pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
+        document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+        button.textContent=mission==='daily-checkin'?'Completed today':'Test completed';
+        return setStatus('Mission already completed.');
+      }
+      throw new Error(data.error||'Mission failed');
+    }
     pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
-    setStatus('Test reward added: +'+amount+' points.');
-    button.textContent='Test completed';
+    document.getElementById('streak').textContent=Number(data.streak||0)+' days';
+    setStatus('Mission completed: +'+Number(data.points_added||0)+' points.');
+    button.textContent=mission==='daily-checkin'?'Completed today':'Test completed';
   }catch(e){setStatus(e.message);button.disabled=false}
 }
 document.getElementById('load').addEventListener('click',loadUser);
 document.getElementById('reset').addEventListener('click',()=>{walletEl.value='TEST_WALLET_001';loadUser()});
-document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>addTestPoints(b)));
+document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>claimMission(b)));
 loadUser();
 </script>
 </body>
