@@ -42,7 +42,7 @@
     </div>
     <div class="card">
       <div class="section-title"><h2>Daily Missions</h2><span class="label">5 PTS EACH</span></div>
-      <div class="sub" id="dailyPostInfo">Daily X post: not configured yet.</div>
+      <div class="sub" id="dailyPostInfo">Newest @BrokeCEOcoin original post is selected automatically.</div>
       <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin">Complete test</button></div><div class="reward">+5</div></div>
       <div class="task"><div><h3>Like BROKE CEO post</h3><p>Like the configured mission post, then verify.</p><button data-x-mission="like-post" disabled>Post not set</button></div><div class="reward">+5</div></div>
       <div class="task"><div><h3>Repost BROKE CEO post</h3><p>Repost the configured mission post, then verify.</p><button data-x-mission="repost-post" disabled>Post not set</button></div><div class="reward">+5</div></div>
@@ -59,7 +59,7 @@
     <div class="card">
       <div class="label">X VERIFICATION</div>
       <h2 style="margin:10px 0">Server-side X checks</h2>
-      <p class="sub">Connect X, then BROKE POINTS verifies follow, like, repost and reply activity through the X API before awarding points. Discord remains <span class="check">SOON</span>.</p>
+      <p class="sub">Connect X, then BROKE POINTS automatically tracks the newest @BrokeCEOcoin original post and verifies follow, like, repost and reply activity through the X API before awarding points. Discord remains <span class="check">SOON</span>.</p>
       <div class="note">TEST MODE NOTE: direct point awards are disabled. X rewards use server-side verification and duplicate protection.</div>
     </div>
   </section>
@@ -118,9 +118,11 @@ async function loadUser(){
     });
     const postInfo=document.getElementById('dailyPostInfo');
     if(data.x_daily_post_url){
-      postInfo.innerHTML='Daily X post: <a href="'+data.x_daily_post_url+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a>';
+      postInfo.innerHTML='Daily X post: <a href="'+data.x_daily_post_url+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a> • Auto-updates from @BrokeCEOcoin';
+    }else if(data.x_sync_error){
+      postInfo.innerHTML='<span style="color:var(--danger)">Automatic X sync: '+data.x_sync_error+'</span>';
     }else{
-      postInfo.textContent='Daily X post: not configured yet.';
+      postInfo.textContent='Waiting for the newest @BrokeCEOcoin original post…';
     }
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
