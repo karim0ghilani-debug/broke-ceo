@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div class="test">PRIVATE TEST MODE</div></header>
+  <header class="top"><div class="brand">BROKE <span>POINTS</span></div><div class="test">FREE TEST MODE</div></header>
   <section class="hero">
     <div class="kicker">BROKE CEO ECOSYSTEM</div>
     <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
@@ -42,25 +42,21 @@
     </div>
     <div class="card">
       <div class="section-title"><h2>Daily Missions</h2><span class="label">5 PTS EACH</span></div>
-      <div class="sub" id="dailyPostInfo">Newest @BrokeCEOcoin original post is selected automatically every day at 10:05 AM (Lisbon time).</div>
+      <div class="sub" id="dailyPostInfo">Current daily mission post. Free mode does not use the paid X API.</div>
       <div class="task"><div><h3>Daily Check-in</h3><p>Always available once per day.</p><button data-action="daily-checkin">Complete test</button></div><div class="reward">+5</div></div>
-      <div class="task"><div><h3>Like BROKE CEO post</h3><p>Like the configured mission post, then verify.</p><button data-x-mission="like-post" disabled>Post not set</button></div><div class="reward">+5</div></div>
-      <div class="task"><div><h3>Repost BROKE CEO post</h3><p>Repost the configured mission post, then verify.</p><button data-x-mission="repost-post" disabled>Post not set</button></div><div class="reward">+5</div></div>
-      <div class="task"><div><h3>Reply to BROKE CEO post</h3><p>Reply to the configured mission post, then verify.</p><button data-x-mission="reply-post" disabled>Post not set</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Like BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="like-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Repost BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="repost-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
+      <div class="task"><div><h3>Reply to BROKE CEO post</h3><p>Opens the daily mission post. Claim once per day.</p><button data-action="reply-post" data-x-link="post" disabled>Open X + claim</button></div><div class="reward">+5</div></div>
     </div>
     <div class="card">
       <div class="section-title"><h2>One-Time Missions</h2><span class="label">REDEEM ONCE</span></div>
-      <div class="task"><div><h3>Connect X</h3><p>Connect your X account once. Verified server-side.</p><button id="connectX">Connect X</button></div><div class="reward">+100</div></div>
-      <div class="task"><div><h3>Follow BROKE CEO</h3><p>Follow <a href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener" style="color:var(--teal)">@BrokeCEOcoin</a>, then verify.</p><button data-x-mission="follow-broke-ceo">Verify follow</button></div><div class="reward">+50</div></div>
-      <div class="task"><div><h3>Like BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
-      <div class="task"><div><h3>Reply to BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
-      <div class="task"><div><h3>Retweet BROKE CEO article</h3><p>Verification will use X checker.</p><button disabled>Checker pending</button></div><div class="reward">+50</div></div>
+      <div class="task"><div><h3>Follow BROKE CEO</h3><p>Opens <a href="https://x.com/BrokeCEOcoin" target="_blank" rel="noopener" style="color:var(--teal)">@BrokeCEOcoin</a>. Claim this reward once.</p><button data-action="follow-broke-ceo" data-x-link="profile">Follow + claim</button></div><div class="reward">+50</div></div>
     </div>
     <div class="card">
-      <div class="label">X VERIFICATION</div>
-      <h2 style="margin:10px 0">Server-side X checks</h2>
-      <p class="sub">Connect X, then BROKE POINTS checks for the newest @BrokeCEOcoin original post every day at 10:05 AM (Lisbon time) and verifies follow, like, repost and reply activity through the X API before awarding points. Discord remains <span class="check">SOON</span>.</p>
-      <div class="note">TEST MODE NOTE: direct point awards are disabled. X rewards use server-side verification and duplicate protection.</div>
+      <div class="label">FREE MISSION MODE</div>
+      <h2 style="margin:10px 0">No paid X API</h2>
+      <p class="sub">Mission buttons open the correct X page and award the configured points with server-side duplicate protection. No X API verification is used. Discord remains <span class="check">SOON</span>.</p>
+      <div class="note">FREE MODE NOTE: the system cannot prove that a user actually followed, liked, reposted or replied. It only prevents claiming the same reward more often than allowed.</div>
     </div>
   </section>
   <div class="footer">BROKE CEO • PRIVATE DEVELOPMENT BOARD • NOT PUBLIC</div>
@@ -71,6 +67,7 @@ const walletEl=document.getElementById('wallet');
 const pointsEl=document.getElementById('points');
 const userEl=document.getElementById('user');
 const statusEl=document.getElementById('status');
+let currentMissionPostUrl='';
 function setStatus(t){statusEl.textContent=t}
 async function loadUser(){
   const wallet=walletEl.value.trim();
@@ -90,39 +87,33 @@ async function loadUser(){
       nextBonus.textContent='All streak milestones completed.';
     }
     const dailyBtn=document.querySelector('[data-action="daily-checkin"]');
-    const connectXBtn=document.getElementById('connectX');
     if(dailyBtn&&data.missions?.daily_checkin_completed){dailyBtn.disabled=true;dailyBtn.textContent='Completed today'}
-    if(connectXBtn&&data.x_connected){
-      connectXBtn.disabled=true;
-      connectXBtn.textContent='Connected @'+(data.x_profile?.username||data.twitter_username||'X');
-    }
-    const followBtn=document.querySelector('[data-x-mission="follow-broke-ceo"]');
-    const likeBtn=document.querySelector('[data-x-mission="like-post"]');
-    const repostBtn=document.querySelector('[data-x-mission="repost-post"]');
-    const replyBtn=document.querySelector('[data-x-mission="reply-post"]');
-    const xButtons=[followBtn,likeBtn,repostBtn,replyBtn].filter(Boolean);
-    xButtons.forEach(b=>{b.disabled=!data.x_connected});
+
+    currentMissionPostUrl=data.x_daily_post_url||'';
+
+    const followBtn=document.querySelector('[data-action="follow-broke-ceo"]');
+    const likeBtn=document.querySelector('[data-action="like-post"]');
+    const repostBtn=document.querySelector('[data-action="repost-post"]');
+    const replyBtn=document.querySelector('[data-action="reply-post"]');
+
     if(followBtn){
       if(data.missions?.follow_broke_ceo_completed){followBtn.disabled=true;followBtn.textContent='Completed'}
-      else followBtn.textContent=data.x_connected?'Verify follow':'Connect X first';
+      else{followBtn.disabled=false;followBtn.textContent='Follow + claim'}
     }
-    const postButtons=[likeBtn,repostBtn,replyBtn].filter(Boolean);
-    const labels={likeBtn:'Verify like',repostBtn:'Verify repost',replyBtn:'Verify reply'};
-    postButtons.forEach(b=>{
-      if(!data.x_connected){b.disabled=true;b.textContent='Connect X first';return}
-      if(!data.x_daily_post_id){b.disabled=true;b.textContent='Post not set';return}
-      const mission=b.dataset.xMission;
+
+    [likeBtn,repostBtn,replyBtn].filter(Boolean).forEach(b=>{
+      const mission=b.dataset.action;
       const done=mission==='like-post'?data.missions?.like_post_completed:mission==='repost-post'?data.missions?.repost_post_completed:data.missions?.reply_post_completed;
-      if(done){b.disabled=true;b.textContent='Completed today'}
-      else{b.disabled=false;b.textContent=mission==='like-post'?'Verify like':mission==='repost-post'?'Verify repost':'Verify reply'}
+      if(done){b.disabled=true;b.textContent='Completed today';return}
+      if(!currentMissionPostUrl){b.disabled=true;b.textContent='Post not set';return}
+      b.disabled=false;b.textContent='Open X + claim';
     });
+
     const postInfo=document.getElementById('dailyPostInfo');
-    if(data.x_daily_post_url){
-      postInfo.innerHTML='Daily X post: <a href="'+data.x_daily_post_url+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a> • Auto-updates from @BrokeCEOcoin';
-    }else if(data.x_sync_error){
-      postInfo.innerHTML='<span style="color:var(--danger)">Automatic X sync: '+data.x_sync_error+'</span>';
+    if(currentMissionPostUrl){
+      postInfo.innerHTML='Daily X post: <a href="'+currentMissionPostUrl+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a> • Free mode';
     }else{
-      postInfo.textContent='Waiting for the newest @BrokeCEOcoin original post…';
+      postInfo.textContent='Daily mission post is not set yet.';
     }
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
@@ -131,7 +122,14 @@ async function claimMission(button){
   const wallet=walletEl.value.trim();
   const mission=button.dataset.action;
   if(!wallet)return setStatus('Enter a wallet address first.');
-  button.disabled=true;setStatus('Submitting mission…');
+  const xLink=button.dataset.xLink;
+  if(xLink==='profile'){
+    window.open('https://x.com/BrokeCEOcoin','_blank','noopener,noreferrer');
+  }else if(xLink==='post'){
+    if(!currentMissionPostUrl)return setStatus('Daily mission post is not set.');
+    window.open(currentMissionPostUrl,'_blank','noopener,noreferrer');
+  }
+  button.disabled=true;setStatus('Claiming mission…');
   try{
     const r=await fetch(API+'/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
     const data=await r.json();
@@ -142,7 +140,7 @@ async function claimMission(button){
         if(data.next_streak_bonus){
           document.getElementById('nextBonus').textContent='Next streak bonus: '+Number(data.next_streak_bonus.days)+' days → +'+Number(data.next_streak_bonus.points).toLocaleString()+' PTS';
         }
-        button.textContent=mission==='daily-checkin'?'Completed today':'Test completed';
+        button.textContent=mission==='follow-broke-ceo'?'Completed':'Completed today';
         return setStatus('Mission already completed.');
       }
       throw new Error(data.error||'Mission failed');
@@ -159,38 +157,13 @@ async function claimMission(button){
     }else{
       setStatus('Mission completed: +'+Number(data.points_added||0)+' points.');
     }
-    button.textContent=mission==='daily-checkin'?'Completed today':'Test completed';
+    button.textContent=mission==='follow-broke-ceo'?'Completed':'Completed today';
   }catch(e){setStatus(e.message);button.disabled=false}
 }
 document.getElementById('load').addEventListener('click',loadUser);
 document.getElementById('reset').addEventListener('click',()=>{walletEl.value='TEST_WALLET_001';loadUser()});
 document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>claimMission(b)));
 
-async function verifyXMission(button){
-  const wallet=walletEl.value.trim();
-  const mission=button.dataset.xMission;
-  if(!wallet)return setStatus('Enter a wallet address first.');
-  button.disabled=true;setStatus('Checking X…');
-  try{
-    const r=await fetch(API+'/x/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
-    const data=await r.json();
-    if(!r.ok)throw new Error(data.error||'X verification failed');
-    pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
-    button.textContent=data.already_completed?(mission==='follow-broke-ceo'?'Completed':'Completed today'):(mission==='follow-broke-ceo'?'Completed':'Completed today');
-    setStatus(data.points_added>0?'Verified on X: +'+Number(data.points_added)+' PTS.':'Mission already completed.');
-  }catch(e){
-    setStatus(e.message);
-    button.disabled=false;
-  }
-}
-document.querySelectorAll('[data-x-mission]').forEach(b=>b.addEventListener('click',()=>verifyXMission(b)));
-
-document.getElementById('connectX').addEventListener('click',()=>{
-  const wallet=walletEl.value.trim();
-  if(!wallet)return setStatus('Enter a wallet address first.');
-  setStatus('Finish X authorization in the new tab, then click Load balance.');
-  window.open(API+'/x/connect?wallet='+encodeURIComponent(wallet),'_blank','noopener,noreferrer');
-});
 loadUser();
 </script>
 </body>
