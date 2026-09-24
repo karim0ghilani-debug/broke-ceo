@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BROKE CEO — Profile Test</title>
+<style>
+:root{--bg:#050b0d;--panel:#0b1518;--panel2:#0e1a1d;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,rgba(24,240,206,.10),transparent 34%),#050b0d;color:var(--text);font-family:Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{max-width:1120px;margin:auto;padding:28px 22px 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 22px;border-bottom:1px solid var(--line)}.brand{font-size:23px;font-weight:900}.brand span{color:var(--teal)}.nav{display:flex;gap:9px;flex-wrap:wrap}.nav a{border:1px solid var(--line);padding:9px 12px;border-radius:10px;color:var(--muted);font-size:12px;font-weight:800}.nav a:hover{color:var(--teal);border-color:var(--teal)}.test{display:inline-block;margin-top:30px;background:var(--teal);color:#041012;font-size:10px;font-weight:900;letter-spacing:2px;padding:7px 10px;border-radius:999px}.loader{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.loader input{width:min(430px,100%);background:var(--panel);border:1px solid var(--line);color:var(--text);padding:13px 15px;border-radius:10px}.btn{background:var(--teal);border:1px solid var(--teal);color:#041012;font-weight:900;padding:12px 16px;border-radius:10px;cursor:pointer}.status{min-height:20px;color:var(--muted);font-size:12px;margin-top:10px}.hero{margin-top:28px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}.identity{display:flex;align-items:center;gap:18px}.avatar{width:86px;height:86px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);background:#0b1518}.who h1{margin:0 0 6px;font-size:34px;letter-spacing:-1px}.handle{color:var(--teal);font-weight:800}.member{color:var(--muted);font-size:12px;margin-top:7px}.stats{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:12px;flex:1;min-width:min(100%,460px)}.stat{background:#071114;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}.stat span{display:block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.5px}.stat b{display:block;margin-top:7px;font-size:24px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px}.title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.title h2{margin:0;font-size:20px}.badge{font-size:10px;color:var(--teal);font-weight:900;letter-spacing:1.5px}.empty{border:1px dashed rgba(255,255,255,.12);border-radius:14px;padding:26px;text-align:center;color:var(--muted);font-size:13px}.inventory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.item{border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;background:#071114}.item img{width:100%;aspect-ratio:1.6/1;object-fit:cover;border-radius:10px;background:#0d191c}.item h3{font-size:14px;margin:10px 0 4px}.item p{margin:0;color:var(--muted);font-size:11px}.history{display:grid;gap:9px}.row{display:grid;grid-template-columns:1.4fr .6fr .7fr;gap:10px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.07);font-size:12px}.row:first-child{border-top:0}.row strong{font-size:13px}.right{text-align:right}.muted{color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:28px}@media(max-width:800px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.identity{align-items:flex-start}.who h1{font-size:28px}.inventory{grid-template-columns:1fr}}
+.gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}.gate-card{width:min(520px,100%);text-align:center;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:22px;padding:42px 28px}.gate-card h1{margin:8px 0 12px;font-size:42px;letter-spacing:-2px}.gate-card h1 span{color:var(--teal)}.gate-card p{color:var(--muted);line-height:1.6}.xbtn{display:inline-block;margin-top:18px;background:var(--teal);color:#041012;border:0;border-radius:12px;padding:14px 22px;font-weight:900;cursor:pointer}.gate-kicker{color:var(--teal);font-size:11px;font-weight:900;letter-spacing:3px}.protected{display:none}</style>
+</head>
+<body>
+<div id="authGate" class="gate">
+  <div class="gate-card">
+    <div class="gate-kicker">BROKE CEO MEMBERS</div>
+    <h1>CONNECT <span>X</span></h1>
+    <p>Connect your X account to open your BROKE profile.</p>
+    <button class="xbtn" id="connectX">Connect X</button>
+    <div class="status" id="gateStatus"></div>
+  </div>
+</div>
+<div id="protected" class="protected">
+<div class="wrap">
+<header class="top">
+  <div class="brand">BROKE <span>PROFILE</span></div>
+  <nav class="nav">
+    <a id="boardLink" href="/store/board-test/">Missions</a>
+    <a href="/store-test/">Store</a>
+    <a href="/leaderboard-test/">Leaderboard</a>
+  </nav>
+</header>
+
+<div class="test">PRIVATE PROFILE TEST</div>
+<div class="status" id="status"></div>
+
+<section class="hero">
+  <div class="identity">
+    <img class="avatar" id="avatar" alt="X profile avatar">
+    <div class="who">
+      <h1 id="displayName">BROKE CEO Member</h1>
+      <div class="handle" id="handle">X not connected</div>
+      <div class="member" id="memberSince"></div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><span>BROKE POINTS</span><b id="points">—</b></div>
+    <div class="stat"><span>DAILY STREAK</span><b id="streak">—</b></div>
+    <div class="stat"><span>STORE PURCHASES</span><b id="purchaseCount">0</b></div>
+    <div class="stat"><span>POINTS SPENT</span><b id="spent">0</b></div>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <div class="title"><h2>Inventory</h2><span class="badge" id="inventoryCount">0 ITEMS</span></div>
+    <div id="inventory" class="empty">Your BROKE STORE items will appear here.</div>
+  </div>
+  <div class="card">
+    <div class="title"><h2>Purchase History</h2><span class="badge">STORE HISTORY</span></div>
+    <div id="history" class="empty">No purchases yet. The store is still coming soon.</div>
+  </div>
+</section>
+
+<div class="footer">BROKE CEO • PRIVATE PROFILE TEST • NOT PUBLIC NAVIGATION</div>
+</div>
+</div>
+<script>
+const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
+const qs=new URLSearchParams(location.search);
+const wallet=qs.get('wallet')||localStorage.getItem('broke_wallet')||'';
+const statusEl=document.getElementById('status');
+const gate=document.getElementById('authGate');
+const protectedEl=document.getElementById('protected');
+const gateStatus=document.getElementById('gateStatus');
+document.getElementById('connectX').addEventListener('click',()=>{
+  if(!wallet){location.href='/store/board-test/';return}
+  location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet);
+});
+const avatarEl=document.getElementById('avatar');
+avatarEl.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0d191c"/><circle cx="50" cy="38" r="18" fill="#18f0ce"/><path d="M18 92c3-25 18-36 32-36s29 11 32 36" fill="#18f0ce"/></svg>');
+function fmtDate(v){if(!v)return'';const d=new Date(v.replace(' ','T')+'Z');return isNaN(d)?v:d.toLocaleDateString()}
+async function loadProfile(){
+  if(!wallet){gateStatus.textContent='Open BROKE POINTS first, then connect X.';return}
+  localStorage.setItem('broke_wallet',wallet);
+  history.replaceState(null,'','?wallet='+encodeURIComponent(wallet));
+  document.getElementById('boardLink').href='/store/board-test/?wallet='+encodeURIComponent(wallet);
+  statusEl.textContent='Loading profile…';
+  try{
+    const r=await fetch(API+'/profile?wallet='+encodeURIComponent(wallet));
+    const d=await r.json();
+    if(!r.ok){
+      if(d.code==='X_REQUIRED'){
+        gateStatus.textContent='Connect X to continue.';
+        return;
+      }
+      throw new Error(d.error||'Profile failed');
+    }
+    gate.style.display='none';
+    protectedEl.style.display='block';
+    document.getElementById('points').textContent=Number(d.points||0).toLocaleString();
+    document.getElementById('streak').textContent=Number(d.streak||0)+'d';
+    document.getElementById('purchaseCount').textContent=Number(d.purchase_count||0).toLocaleString();
+    document.getElementById('spent').textContent=Number(d.total_spent_points||0).toLocaleString();
+    document.getElementById('memberSince').textContent='Member since '+fmtDate(d.member_since);
+    if(d.x_connected&&d.x_profile){
+      document.getElementById('displayName').textContent=d.x_profile.display_name||d.x_profile.username;
+      document.getElementById('handle').textContent='@'+d.x_profile.username;
+      if(d.x_profile.profile_image_url)avatarEl.src=d.x_profile.profile_image_url.replace('_normal','_400x400');
+    }else{
+      document.getElementById('displayName').textContent='BROKE CEO Member';
+      document.getElementById('handle').textContent='X not connected';
+    }
+
+    const inv=d.inventory||[];
+    document.getElementById('inventoryCount').textContent=inv.length+' ITEM'+(inv.length===1?'':'S');
+    const invEl=document.getElementById('inventory');
+    if(!inv.length){
+      invEl.className='empty';
+      invEl.textContent='Your BROKE STORE items will appear here.';
+    }else{
+      invEl.className='inventory';
+      invEl.innerHTML=inv.map(i=>'<div class="item">'+(i.product_image_url?'<img src="'+i.product_image_url+'" alt="">':'')+'<h3>'+i.product_name+'</h3><p>'+(i.variant?i.variant+' • ':'')+'Qty '+i.quantity+'</p></div>').join('');
+    }
+
+    const hist=d.purchase_history||[];
+    const h=document.getElementById('history');
+    if(!hist.length){
+      h.className='empty';
+      h.textContent='No purchases yet. The store is still coming soon.';
+    }else{
+      h.className='history';
+      h.innerHTML=hist.map(p=>'<div class="row"><div><strong>'+p.product_name+'</strong><div class="muted">'+fmtDate(p.purchased_at)+(p.variant?' • '+p.variant:'')+'</div></div><div class="right">x'+p.quantity+'</div><div class="right">'+Number(p.total_points).toLocaleString()+' PTS</div></div>').join('');
+    }
+    statusEl.textContent='Profile loaded.';
+  }catch(e){statusEl.textContent=e.message}
+}
+loadProfile();
+</script>
+</body>
+</html>
