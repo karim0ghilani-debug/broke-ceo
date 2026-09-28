@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
 <title>BROKE CEO — Profile Test</title>
 <style>
 :root{--bg:#050b0d;--panel:#0b1518;--panel2:#0e1a1d;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
@@ -66,8 +68,7 @@
 </div>
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
-const qs=new URLSearchParams(location.search);
-const wallet=qs.get('wallet')||localStorage.getItem('broke_wallet')||'';
+const wallet=localStorage.getItem('broke_wallet')||'';
 const statusEl=document.getElementById('status');
 const gate=document.getElementById('authGate');
 const protectedEl=document.getElementById('protected');
@@ -78,12 +79,14 @@ document.getElementById('connectX').addEventListener('click',()=>{
 });
 const avatarEl=document.getElementById('avatar');
 avatarEl.src='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0d191c"/><circle cx="50" cy="38" r="18" fill="#18f0ce"/><path d="M18 92c3-25 18-36 32-36s29 11 32 36" fill="#18f0ce"/></svg>');
-function fmtDate(v){if(!v)return'';const d=new Date(v.replace(' ','T')+'Z');return isNaN(d)?v:d.toLocaleDateString()}
+function fmtDate(v){if(!v)return'';const d=new Date(String(v).replace(' ','T')+'Z');return isNaN(d)?String(v):d.toLocaleDateString()}
+function esc(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function safeHttpsUrl(v){try{const u=new URL(String(v));return u.protocol==='https:'?u.href:''}catch{return''}}
 async function loadProfile(){
   if(!wallet){gateStatus.textContent='Open BROKE POINTS first, then connect X.';return}
   localStorage.setItem('broke_wallet',wallet);
-  history.replaceState(null,'','?wallet='+encodeURIComponent(wallet));
-  document.getElementById('boardLink').href='/store/board-test/?wallet='+encodeURIComponent(wallet);
+  history.replaceState(null,'',location.pathname);
+  document.getElementById('boardLink').href='/store/board-test/';
   statusEl.textContent='Loading profile…';
   try{
     const r=await fetch(API+'/profile?wallet='+encodeURIComponent(wallet));
@@ -119,7 +122,10 @@ async function loadProfile(){
       invEl.textContent='Your BROKE STORE items will appear here.';
     }else{
       invEl.className='inventory';
-      invEl.innerHTML=inv.map(i=>'<div class="item">'+(i.product_image_url?'<img src="'+i.product_image_url+'" alt="">':'')+'<h3>'+i.product_name+'</h3><p>'+(i.variant?i.variant+' • ':'')+'Qty '+i.quantity+'</p></div>').join('');
+      invEl.innerHTML=inv.map(i=>{
+        const img=safeHttpsUrl(i.product_image_url);
+        return '<div class="item">'+(img?'<img src="'+esc(img)+'" alt="">':'')+'<h3>'+esc(i.product_name)+'</h3><p>'+(i.variant?esc(i.variant)+' • ':'')+'Qty '+Number(i.quantity||0)+'</p></div>';
+      }).join('');
     }
 
     const hist=d.purchase_history||[];
@@ -129,7 +135,7 @@ async function loadProfile(){
       h.textContent='No purchases yet. The store is still coming soon.';
     }else{
       h.className='history';
-      h.innerHTML=hist.map(p=>'<div class="row"><div><strong>'+p.product_name+'</strong><div class="muted">'+fmtDate(p.purchased_at)+(p.variant?' • '+p.variant:'')+'</div></div><div class="right">x'+p.quantity+'</div><div class="right">'+Number(p.total_points).toLocaleString()+' PTS</div></div>').join('');
+      h.innerHTML=hist.map(p=>'<div class="row"><div><strong>'+esc(p.product_name)+'</strong><div class="muted">'+esc(fmtDate(p.purchased_at))+(p.variant?' • '+esc(p.variant):'')+'</div></div><div class="right">x'+Number(p.quantity||0)+'</div><div class="right">'+Number(p.total_points||0).toLocaleString()+' PTS</div></div>').join('');
     }
     statusEl.textContent='Profile loaded.';
   }catch(e){statusEl.textContent=e.message}
