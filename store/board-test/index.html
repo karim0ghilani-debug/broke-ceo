@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://pbs.twimg.com; connect-src 'self' https://broke-ceo-board.karim0ghilani.workers.dev; font-src 'self' data:; upgrade-insecure-requests">
 <title>BROKE POINTS — Private Test</title>
 <style>
 :root{--bg:#050b0d;--panel:#0a1417;--panel2:#0d191c;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
@@ -19,7 +20,7 @@
     <h1>EARN. <span>CHECK IN.</span> REPEAT.</h1>
     <p>This is the private board prototype. It connects to the existing BROKE POINTS API and is not linked from the public BROKE STORE.</p>
     <div class="connect">
-      <input id="wallet" value="TEST_WALLET_001" placeholder="Wallet address">
+      <input id="wallet" value="TEST_WALLET_001" placeholder="Wallet address" maxlength="128" autocomplete="off" autocapitalize="off" spellcheck="false">
       <button class="btn" id="load">Load balance</button>
       <button class="btn secondary" id="reset">Reset field</button>
     </div>
@@ -66,12 +67,29 @@
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
 const walletEl=document.getElementById('wallet');
-walletEl.value=localStorage.getItem('broke_wallet')||walletEl.value;
+const storedWallet=sessionStorage.getItem('broke_wallet')||localStorage.getItem('broke_wallet')||'';
+if(storedWallet){
+  sessionStorage.setItem('broke_wallet',storedWallet);
+  localStorage.removeItem('broke_wallet');
+  walletEl.value=storedWallet;
+}
 const pointsEl=document.getElementById('points');
 const userEl=document.getElementById('user');
 const statusEl=document.getElementById('status');
 let currentMissionPostUrl='';
 function setStatus(t){statusEl.textContent=t}
+function normalizeWallet(v){
+  const x=String(v||'').trim();
+  return /^[A-Za-z0-9:_-]{3,128}$/.test(x)?x:'';
+}
+async function apiFetch(path,options={}){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  try{
+    const headers={Accept:'application/json',...(options.headers||{})};
+    return await fetch(API+path,{...options,headers,cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:controller.signal});
+  }finally{clearTimeout(timer)}
+}
 function safeXUrl(v){
   try{
     const u=new URL(String(v||''));
@@ -79,11 +97,12 @@ function safeXUrl(v){
   }catch{return''}
 }
 async function loadUser(){
-  const wallet=walletEl.value.trim();
-  if(!wallet){setStatus('Enter a wallet address.');return}
+  const wallet=normalizeWallet(walletEl.value);
+  if(!wallet){setStatus('Enter a valid wallet/user identifier.');return}
+  walletEl.value=wallet;
   setStatus('Loading…');
   try{
-    const r=await fetch(API+'/user?wallet='+encodeURIComponent(wallet));
+    const r=await apiFetch('/user?wallet='+encodeURIComponent(wallet));
     const data=await r.json();
     if(!r.ok) throw new Error(data.error||'User not found');
     pointsEl.innerHTML=Number(data.points||0).toLocaleString()+' <small>PTS</small>';
@@ -132,16 +151,17 @@ async function loadUser(){
     }else{
       postInfo.textContent='Daily mission post is not set yet.';
     }
-    localStorage.setItem('broke_wallet',wallet);
+    sessionStorage.setItem('broke_wallet',wallet);
+    localStorage.removeItem('broke_wallet');
     const profileLink=document.getElementById('profileLink');if(profileLink)profileLink.href='/profile-test/';
     const storeLink=document.getElementById('storeLink');if(storeLink)storeLink.href='/store/';
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
 async function claimMission(button){
-  const wallet=walletEl.value.trim();
+  const wallet=normalizeWallet(walletEl.value);
   const mission=button.dataset.action;
-  if(!wallet)return setStatus('Enter a wallet address first.');
+  if(!wallet)return setStatus('Enter a valid wallet/user identifier first.');
   const xLink=button.dataset.xLink;
   if(xLink==='profile'){
     window.open('https://x.com/BrokeCEOcoin','_blank','noopener,noreferrer');
@@ -151,7 +171,7 @@ async function claimMission(button){
   }
   button.disabled=true;setStatus('Claiming mission…');
   try{
-    const r=await fetch(API+'/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
+    const r=await apiFetch('/mission',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet,mission})});
     const data=await r.json();
     if(!r.ok){
       if(data.code==='ALREADY_CLAIMED'){
