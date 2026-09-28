@@ -1,0 +1,70 @@
+name: Production security guard
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  security-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Scan production source
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import sys
+
+          forbidden_routes = [
+              "leaderboard-test",
+              "profile-test",
+              "store-test",
+              "store/board-test",
+              "TEST_WALLET",
+              "TEST_DISCORD",
+              "broke-ceo-board.karim0ghilani.workers.dev",
+          ]
+
+          secret_patterns = [
+              re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
+              re.compile(r"Bearer\s+[A-Za-z0-9._~-]{20,}", re.I),
+              re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
+              re.compile(r"(?:client[_-]?secret|api[_-]?key|private[_-]?key|password)\s*[:=]\s*['\"][^'\"]{8,}['\"]", re.I),
+          ]
+
+          suffixes = {".html", ".js", ".mjs", ".cjs", ".json", ".md", ".txt", ".css"}
+          problems = []
+
+          for path in Path(".").rglob("*"):
+              if not path.is_file():
+                  continue
+              if ".git" in path.parts or ".github" in path.parts or "assets" in path.parts:
+                  continue
+              if path.suffix.lower() not in suffixes:
+                  continue
+              try:
+                  text = path.read_text(encoding="utf-8")
+              except UnicodeDecodeError:
+                  continue
+
+              for marker in forbidden_routes:
+                  if marker in text or marker in path.as_posix():
+                      problems.append(f"{path}: forbidden production marker: {marker}")
+
+              for pattern in secret_patterns:
+                  if pattern.search(text):
+                      problems.append(f"{path}: possible committed secret matching {pattern.pattern}")
+
+          if problems:
+              print("\n".join(problems))
+              sys.exit(1)
+
+          print("Production security guard passed.")
