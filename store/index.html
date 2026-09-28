@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://pbs.twimg.com; connect-src 'self' https://broke-ceo-board.karim0ghilani.workers.dev; font-src 'self' https://fonts.gstatic.com data:; upgrade-insecure-requests">
 
   <meta
     name="description"
@@ -271,11 +272,22 @@
   </div>
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
-const wallet=localStorage.getItem('broke_wallet')||'';
+const legacyWallet=localStorage.getItem('broke_wallet')||'';
+if(legacyWallet&&!sessionStorage.getItem('broke_wallet'))sessionStorage.setItem('broke_wallet',legacyWallet);
+localStorage.removeItem('broke_wallet');
+const wallet=sessionStorage.getItem('broke_wallet')||'';
 if(location.search)history.replaceState(null,'',location.pathname);
 const gate=document.getElementById('authGate');
 const protectedEl=document.getElementById('protected');
 const gateStatus=document.getElementById('gateStatus');
+async function apiFetch(path,options={}){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  try{
+    const headers={Accept:'application/json',...(options.headers||{})};
+    return await fetch(API+path,{...options,headers,cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer',signal:controller.signal});
+  }finally{clearTimeout(timer)}
+}
 
 document.getElementById('connectX').addEventListener('click',()=>{
   if(!wallet){location.href='/store/board-test/';return}
@@ -286,13 +298,14 @@ async function switchXAccount(){
   if(!wallet)return;
   gateStatus.textContent='Disconnecting X…';
   try{
-    const r=await fetch(API+'/x/disconnect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet})});
+    const r=await apiFetch('/x/disconnect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({wallet})});
     const d=await r.json();
     if(!r.ok)throw new Error(d.error||'Could not disconnect X');
     location.href=API+'/x/connect?wallet='+encodeURIComponent(wallet)+'&return_to=store';
   }catch(e){gateStatus.textContent=e.message}
 }
 function logoutWebsite(){
+  sessionStorage.removeItem('broke_wallet');
   localStorage.removeItem('broke_wallet');
   location.href='/';
 }
@@ -304,9 +317,10 @@ async function checkAccess(){
     gateStatus.textContent='Open BROKE POINTS first, then connect X.';
     return;
   }
-  localStorage.setItem('broke_wallet',wallet);
+  sessionStorage.setItem('broke_wallet',wallet);
+  localStorage.removeItem('broke_wallet');
   try{
-    const r=await fetch(API+'/user?wallet='+encodeURIComponent(wallet));
+    const r=await apiFetch('/user?wallet='+encodeURIComponent(wallet));
     const d=await r.json();
     if(!r.ok) throw new Error(d.error||'Could not check access');
     if(!d.x_connected){
