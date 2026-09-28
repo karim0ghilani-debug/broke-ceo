@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
 
   <meta
     name="description"
@@ -270,8 +271,8 @@
   </div>
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
-const params=new URLSearchParams(location.search);
-const wallet=params.get('wallet')||localStorage.getItem('broke_wallet')||'';
+const wallet=localStorage.getItem('broke_wallet')||'';
+if(location.search)history.replaceState(null,'',location.pathname);
 const gate=document.getElementById('authGate');
 const protectedEl=document.getElementById('protected');
 const gateStatus=document.getElementById('gateStatus');
