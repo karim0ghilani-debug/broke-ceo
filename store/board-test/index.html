@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
 <title>BROKE POINTS — Private Test</title>
 <style>
 :root{--bg:#050b0d;--panel:#0a1417;--panel2:#0d191c;--text:#f5f7f7;--muted:#8fa3a5;--teal:#18f0ce;--line:rgba(24,240,206,.18);--danger:#ff6262}
@@ -64,13 +66,18 @@
 <script>
 const API='https://broke-ceo-board.karim0ghilani.workers.dev/api';
 const walletEl=document.getElementById('wallet');
-const urlWallet=new URLSearchParams(location.search).get('wallet');
-if(urlWallet)walletEl.value=urlWallet;
+walletEl.value=localStorage.getItem('broke_wallet')||walletEl.value;
 const pointsEl=document.getElementById('points');
 const userEl=document.getElementById('user');
 const statusEl=document.getElementById('status');
 let currentMissionPostUrl='';
 function setStatus(t){statusEl.textContent=t}
+function safeXUrl(v){
+  try{
+    const u=new URL(String(v||''));
+    return u.protocol==='https:'&&(u.hostname==='x.com'||u.hostname==='www.x.com')?u.href:'';
+  }catch{return''}
+}
 async function loadUser(){
   const wallet=walletEl.value.trim();
   if(!wallet){setStatus('Enter a wallet address.');return}
@@ -91,7 +98,7 @@ async function loadUser(){
     const dailyBtn=document.querySelector('[data-action="daily-checkin"]');
     if(dailyBtn&&data.missions?.daily_checkin_completed){dailyBtn.disabled=true;dailyBtn.textContent='Completed today'}
 
-    currentMissionPostUrl=data.x_daily_post_url||'';
+    currentMissionPostUrl=safeXUrl(data.x_daily_post_url);
 
     const followBtn=document.querySelector('[data-action="follow-broke-ceo"]');
     const likeBtn=document.querySelector('[data-action="like-post"]');
@@ -113,13 +120,21 @@ async function loadUser(){
 
     const postInfo=document.getElementById('dailyPostInfo');
     if(currentMissionPostUrl){
-      postInfo.innerHTML='Daily X post: <a href="'+currentMissionPostUrl+'" target="_blank" rel="noopener" style="color:var(--teal)">Open mission post ↗</a> • Free mode';
+      postInfo.textContent='Daily X post: ';
+      const a=document.createElement('a');
+      a.href=currentMissionPostUrl;
+      a.target='_blank';
+      a.rel='noopener noreferrer';
+      a.style.color='var(--teal)';
+      a.textContent='Open mission post ↗';
+      postInfo.appendChild(a);
+      postInfo.appendChild(document.createTextNode(' • Free mode'));
     }else{
       postInfo.textContent='Daily mission post is not set yet.';
     }
     localStorage.setItem('broke_wallet',wallet);
-    const profileLink=document.getElementById('profileLink');if(profileLink)profileLink.href='/profile-test/?wallet='+encodeURIComponent(wallet);
-    const storeLink=document.getElementById('storeLink');if(storeLink)storeLink.href='/store/?wallet='+encodeURIComponent(wallet);
+    const profileLink=document.getElementById('profileLink');if(profileLink)profileLink.href='/profile-test/';
+    const storeLink=document.getElementById('storeLink');if(storeLink)storeLink.href='/store/';
     setStatus('Balance loaded successfully.');
   }catch(e){pointsEl.innerHTML='— <small>PTS</small>';userEl.textContent='Not loaded';setStatus(e.message)}
 }
